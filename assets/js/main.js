@@ -12,35 +12,80 @@ nav.querySelectorAll('a').forEach((link) =>
   })
 );
 
-// Header border on scroll
-const header = document.querySelector('.header');
-const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 10);
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
+// Highlight the nav link for the section in view
+const navLinks = [...nav.querySelectorAll('a:not(.btn)')];
+const sections = navLinks
+  .map((a) => document.querySelector(a.getAttribute('href')))
+  .filter(Boolean);
+const setActive = () => {
+  const y = window.scrollY + 140;
+  let current = navLinks[0];
+  sections.forEach((sec, i) => { if (sec.offsetTop <= y) current = navLinks[i]; });
+  navLinks.forEach((a) => a.classList.toggle('active', a === current));
+};
+window.addEventListener('scroll', setActive, { passive: true });
 
-// Reveal sections on scroll
-const revealEls = document.querySelectorAll('.card, .step, .work__item, .review, .member, .section__head');
-revealEls.forEach((el) => el.classList.add('reveal'));
-if ('IntersectionObserver' in window) {
+// Service tabs
+const tabs = document.querySelectorAll('.tab');
+const panels = document.querySelectorAll('[data-panel]');
+const showTab = (name) => {
+  tabs.forEach((t) => {
+    const on = t.dataset.tab === name;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', String(on));
+  });
+  panels.forEach((p) => { p.hidden = p.dataset.panel !== name; });
+};
+tabs.forEach((t) => t.addEventListener('click', () => showTab(t.dataset.tab)));
+document.querySelectorAll('a[data-tab]').forEach((a) =>
+  a.addEventListener('click', () => showTab(a.dataset.tab))
+);
+
+// Reveal elements and count up stats when they scroll into view
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealEls = document.querySelectorAll('.stat, .work__item, .why__item, .step, .review, .award, .head-row');
+const counters = document.querySelectorAll('[data-count]');
+
+const countUp = (el) => {
+  const target = Number(el.dataset.count);
+  const start = performance.now();
+  const dur = 1400;
+  const tick = (now) => {
+    const p = Math.min((now - start) / dur, 1);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+
+if ('IntersectionObserver' in window && !reduceMotion) {
+  revealEls.forEach((el) => el.classList.add('reveal'));
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
+      if (!e.isIntersecting) return;
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
     });
   }, { threshold: 0.12 });
   revealEls.forEach((el) => io.observe(el));
-} else {
-  revealEls.forEach((el) => el.classList.add('visible'));
+
+  counters.forEach((el) => { el.textContent = '0'; });
+  const co = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      countUp(e.target);
+      co.unobserve(e.target);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach((el) => co.observe(el));
 }
 
 // Contact form
-// By default this opens the visitor's email app with the message filled in.
-// To receive submissions without email apps, sign up at https://formspree.io,
-// then set FORM_ENDPOINT to your form URL (e.g. "https://formspree.io/f/xxxxxx").
+// To receive messages by email, set CONTACT_EMAIL. To receive them without the
+// visitor's email app, create a free form at https://formspree.io and set FORM_ENDPOINT.
+// Until either is set, the form sends visitors to the Upwork profile.
 const FORM_ENDPOINT = '';
-const CONTACT_EMAIL = ''; // TODO: add your business email to receive messages
+const CONTACT_EMAIL = '';
 const UPWORK_URL = 'https://www.upwork.com/agencies/1889365964050848512/';
 
 const form = document.getElementById('contactForm');
@@ -59,9 +104,9 @@ form.addEventListener('submit', async (e) => {
   const data = new FormData(form);
 
   if (!FORM_ENDPOINT && !CONTACT_EMAIL) {
-    statusEl.textContent = 'Thanks! Opening our Upwork profile so you can message us there…';
+    statusEl.innerHTML = `Thanks! Please send us this request on <a href="${UPWORK_URL}" target="_blank" rel="noopener"><u>our Upwork profile</u></a>.`;
     statusEl.classList.add('ok');
-    setTimeout(() => window.open(UPWORK_URL, '_blank', 'noopener'), 900);
+    window.open(UPWORK_URL, '_blank', 'noopener');
     return;
   }
 
@@ -76,10 +121,10 @@ form.addEventListener('submit', async (e) => {
     const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
     if (!res.ok) throw new Error();
     form.reset();
-    statusEl.textContent = "Thanks! We'll get back to you within 24 hours.";
+    statusEl.textContent = "Thanks! We'll get back to you soon.";
     statusEl.classList.add('ok');
   } catch {
-    statusEl.textContent = 'Something went wrong. Please email us directly.';
+    statusEl.textContent = 'Something went wrong. Please contact us on Upwork.';
     statusEl.classList.add('err');
   }
 });
