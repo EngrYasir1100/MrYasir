@@ -308,10 +308,48 @@ $$('.work__open').forEach((btn) => btn.addEventListener('click', () => {
   const content = $('.modal__content', modal);
   content.replaceChildren(tpl.content.cloneNode(true));
   modal.showModal();
+  setupGallery($('.gallery', content));
 }));
 if (modal) {
   $('.modal__close', modal).addEventListener('click', () => modal.close());
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
+  modal.addEventListener('keydown', (e) => {
+    const g = $('.gallery', modal);
+    if (!g || !g.go) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); g.go(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); g.go(-1); }
+  });
+}
+
+/* Image gallery inside the project pop-up: arrows, thumbnails, keyboard, swipe */
+function setupGallery(g) {
+  if (!g) return;
+  const thumbs = $$('.gallery__thumb', g);
+  if (thumbs.length < 2) return;
+  const main = $('.gallery__main', g);
+  const count = $('.gallery__count', g);
+  let i = 0;
+  const show = (n) => {
+    i = (n + thumbs.length) % thumbs.length;
+    main.classList.remove('is-in'); void main.offsetWidth;
+    main.src = $('img', thumbs[i]).src;
+    main.classList.add('is-in');
+    thumbs.forEach((t, k) => t.classList.toggle('is-active', k === i));
+    thumbs[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (count) count.textContent = `${i + 1} / ${thumbs.length}`;
+  };
+  g.go = (d) => show(i + d);
+  thumbs.forEach((t, k) => t.addEventListener('click', () => show(k)));
+  $('.gallery__nav--prev', g).addEventListener('click', () => show(i - 1));
+  $('.gallery__nav--next', g).addEventListener('click', () => show(i + 1));
+  let x0 = null;
+  main.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  main.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1));
+    x0 = null;
+  });
 }
 
 /* ---------- Contact form ----------

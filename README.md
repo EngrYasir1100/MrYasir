@@ -27,11 +27,12 @@ Then visit http://localhost:8000.
 
 ## Portfolio images
 
-Images live in `assets/img/portfolio/`. Projects marked **Client project** are real Upwork jobs, but their
-images are illustrations. Projects marked **Concept** are sample work showing the agency's style.
-To use a real image, save it in that folder (for example `my-project.jpg`) and change both `src="..."` paths for
-that project in `portfolio.html` (and `index.html` if it's featured). To turn a concept into a client
-project, change its `Concept` pill to `<span class="pill pill--ok">Client project</span>`.
+Real projects come from the Upwork agency portfolio. Their images live in `assets/img/work/<project>/`
+(`cover.jpg` for the card, `01.jpg`, `02.jpg`… for the pop-up gallery, resized to max 1600px).
+Concept samples for other services are illustrations in `assets/img/portfolio/` and are marked **Concept**.
+
+To add a project, copy one `<article class="work__item">` block in `portfolio.html` (and `index.html`
+to feature it on the home page), change the text, and point the image paths at your new folder.
 
 ## Contact form
 
