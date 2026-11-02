@@ -35,11 +35,14 @@ project, change its `Concept` pill to `<span class="pill pill--ok">Client projec
 
 ## Contact form
 
-The quote form is connected to **hello@deveignagency.com** (`CONTACT_EMAIL` in `assets/js/main.js`).
-Submitting it opens the visitor's email app with their details filled in, addressed to that inbox.
+The quote form sends messages straight to **hello@deveignagency.com** through FormSubmit
+(formsubmit.co), a free service with no account (`CONTACT_EMAIL` / `FORM_ENDPOINT` in `assets/js/main.js`).
 
-To receive messages directly without the visitor's email app, create a free form at https://formspree.io
-with hello@deveignagency.com and paste its URL into `FORM_ENDPOINT`.
+- **One-time activation:** the first message triggers an email from FormSubmit to hello@deveignagency.com.
+  Click **Activate Form** in it once; after that every message arrives automatically.
+- Replies go straight to the client, because their address is set as the reply-to.
+- A hidden field filters out simple spam bots.
+- If sending ever fails, the form opens the visitor's email app instead, so no enquiry is lost.
 
 ## Domain: deveignagency.com
 

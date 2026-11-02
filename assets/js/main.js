@@ -315,12 +315,12 @@ if (modal) {
 }
 
 /* ---------- Contact form ----------
-   To get messages by email, set CONTACT_EMAIL (opens the visitor's email app).
-   To get them without an email app, create a free form at https://formspree.io
-   and paste its URL into FORM_ENDPOINT.
-   Until either is set, visitors are sent to the Upwork profile. */
-const FORM_ENDPOINT = '';
+   Messages are sent straight to CONTACT_EMAIL through FormSubmit (formsubmit.co),
+   a free service with no account. The very first message triggers a one-time
+   activation email to CONTACT_EMAIL: click "Activate Form" in it once.
+   If sending fails, the form falls back to opening the visitor's email app. */
 const CONTACT_EMAIL = 'hello@deveignagency.com';
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 const UPWORK_URL = 'https://www.upwork.com/agencies/1889365964050848512/';
 
 const form = $('#contactForm');
@@ -346,16 +346,39 @@ if (form) {
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('New project inquiry')}&body=${encodeURIComponent(body)}`;
       return;
     }
+    if (data.get('_honey')) return; // spam bot filled the hidden field
+    const button = $('button[type=submit]', form);
+    button.disabled = true;
     statusEl.textContent = 'Sending…';
     try {
-      const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-      if (!res.ok) throw new Error();
+      const payload = {
+        name: data.get('name'),
+        email: data.get('email'),
+        service: data.get('service'),
+        budget: data.get('budget'),
+        message: data.get('message'),
+        _subject: `New project inquiry from ${data.get('name')} — Deveign Agency website`,
+        _replyto: data.get('email'),
+        _template: 'table',
+      };
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || String(out.success) === 'false') throw new Error(out.message || 'send failed');
       form.reset();
-      statusEl.textContent = "Thanks! We'll get back to you soon.";
+      statusEl.textContent = "Thanks! Your message has been sent. We'll reply within 24 hours.";
       statusEl.classList.add('ok');
     } catch {
-      statusEl.textContent = 'Something went wrong. Please contact us on Upwork.';
+      // Fall back to the visitor's email app so the message is never lost
+      const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nService: ${data.get('service')}\nBudget: ${data.get('budget')}\n\n${data.get('message')}`;
+      statusEl.innerHTML = `Couldn't send automatically. Opening your email app, or email us at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`;
       statusEl.classList.add('err');
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('New project inquiry')}&body=${encodeURIComponent(body)}`;
+    } finally {
+      button.disabled = false;
     }
   });
 }

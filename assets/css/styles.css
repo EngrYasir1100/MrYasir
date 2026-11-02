@@ -687,3 +687,4 @@ html:not(.js) .head-row h2::after { transform: scaleX(1); }
   .brandmark__badge { grid-auto-flow: column; gap: .4em; align-items: baseline; }
   .brandmark__tag { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,.3); padding-top: 12px; }
 }
+.hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
