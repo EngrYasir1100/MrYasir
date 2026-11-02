@@ -44,6 +44,28 @@ The quote form sends messages straight to **hello@deveignagency.com** through Fo
 - A hidden field filters out simple spam bots.
 - If sending ever fails, the form opens the visitor's email app instead, so no enquiry is lost.
 
+## Flight Checker app (`flights/`)
+
+A free live flight tracker at **https://deveignagency.com/flights/**. It needs no build step, server or API key.
+
+- **Track a flight:** type a ticket flight number (`EK600`, `PK 301`) or a radio callsign (`UAE600`). It shows
+  where the plane is, its altitude, speed, heading and climb rate, and the nearest airport, on a live map that
+  refreshes every 20 seconds and draws a trail of where the plane has been.
+- **Near an airport:** pick an airport to list and map every plane within 50–200 km. Click **Track** on a row
+  to follow that plane.
+- Shareable links: `flights/?flight=EK600` or `flights/?airport=ISB`. Recent searches are remembered in the browser.
+
+Live positions come from the free [OpenSky Network](https://opensky-network.org) API. Its limits:
+
+- Planes only appear while their transponder is on, roughly from push-back to landing, and only where
+  OpenSky has ground receivers.
+- It has no schedules, gates or delays, so each flight links to FlightAware and Flightradar24 for those.
+- Each visitor's IP gets a daily request allowance. A flight search uses one large request,
+  then each refresh asks only for that one plane, which is cheap.
+
+Files: `flights/index.html` (page), `flights/app.css`, `flights/app.js` (logic) and `flights/data.js`
+(airline codes and airports; add rows there to support more).
+
 ## Domain: deveignagency.com
 
 The site is served by GitHub Pages at **https://deveignagency.com**. The `CNAME` file in the repository

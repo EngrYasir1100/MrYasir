@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flight Checker — Live Flight Status &amp; Tracking | Deveign</title>
+  <meta name="description" content="Check any flight live: enter a flight number to see where it is now, its altitude, speed and route on a map, or see every plane near an airport.">
+  <link rel="canonical" href="https://deveignagency.com/flights/">
+  <meta property="og:title" content="Flight Checker — Live Flight Status &amp; Tracking">
+  <meta property="og:description" content="Enter a flight number to see where it is right now on a live map.">
+  <meta property="og:url" content="https://deveignagency.com/flights/">
+  <meta name="theme-color" content="#050507">
+  <link rel="icon" type="image/png" href="../assets/img/brand/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="wrap bar__inner">
+      <a class="brand" href="../index.html"><img src="../assets/img/brand/logo-mark.png" alt="" width="32" height="32"><span>DEVEIGN</span></a>
+      <span class="bar__title">✈ Flight Checker</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Where is my flight?</h1>
+        <p class="lead">Live position, altitude and speed of any flight in the air, or every plane around an airport. Free, no sign-up.</p>
+
+        <div class="panel">
+          <div class="tabs" role="tablist">
+            <button role="tab" id="tab-flight" aria-controls="pane-flight" aria-selected="true" class="tab">Track a flight</button>
+            <button role="tab" id="tab-airport" aria-controls="pane-airport" aria-selected="false" class="tab" tabindex="-1">Near an airport</button>
+          </div>
+
+          <form id="pane-flight" role="tabpanel" aria-labelledby="tab-flight" class="search" autocomplete="off">
+            <label class="field">
+              <span>Flight number</span>
+              <input id="flightInput" name="flight" placeholder="e.g. EK600, PK301, QR605" maxlength="10" required spellcheck="false" autocapitalize="characters">
+            </label>
+            <button class="btn" type="submit">Check flight</button>
+          </form>
+
+          <form id="pane-airport" role="tabpanel" aria-labelledby="tab-airport" class="search" hidden>
+            <label class="field">
+              <span>Airport</span>
+              <select id="airportSelect" name="airport"></select>
+            </label>
+            <label class="field field--sm">
+              <span>Area</span>
+              <select id="radiusSelect" name="radius">
+                <option value="0.5">≈ 50 km</option>
+                <option value="1" selected>≈ 100 km</option>
+                <option value="2">≈ 200 km</option>
+              </select>
+            </label>
+            <button class="btn" type="submit">Show planes</button>
+          </form>
+
+          <div class="recent" id="recent" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap results">
+      <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+      <article id="flightCard" class="card" hidden>
+        <div class="card__head">
+          <div>
+            <p class="card__airline" id="fAirline"></p>
+            <h2 id="fNumber"></h2>
+          </div>
+          <span class="pill" id="fState"></span>
+        </div>
+        <dl class="stats">
+          <div><dt>Altitude</dt><dd id="fAlt">—</dd></div>
+          <div><dt>Ground speed</dt><dd id="fSpeed">—</dd></div>
+          <div><dt>Heading</dt><dd id="fHeading">—</dd></div>
+          <div><dt>Climb / descent</dt><dd id="fVert">—</dd></div>
+          <div><dt>Near</dt><dd id="fNear">—</dd></div>
+          <div><dt>Registered in</dt><dd id="fCountry">—</dd></div>
+          <div><dt>Aircraft ID</dt><dd id="fHex">—</dd></div>
+          <div><dt>Squawk</dt><dd id="fSquawk">—</dd></div>
+        </dl>
+        <div class="card__foot">
+          <span class="updated"><span class="dot" aria-hidden="true"></span> <span id="fUpdated"></span></span>
+          <span class="links">Gate &amp; schedule:
+            <a id="lnkFA" target="_blank" rel="noopener">FlightAware</a> ·
+            <a id="lnkFR" target="_blank" rel="noopener">Flightradar24</a>
+          </span>
+        </div>
+      </article>
+
+      <div id="mapWrap" class="map-wrap" hidden>
+        <div id="map" aria-label="Map of aircraft positions"></div>
+      </div>
+
+      <article id="airportCard" class="card" hidden>
+        <div class="card__head">
+          <div>
+            <p class="card__airline" id="aCity"></p>
+            <h2 id="aName"></h2>
+          </div>
+          <span class="pill pill--info" id="aCount"></span>
+        </div>
+        <div class="table-scroll">
+          <table class="planes">
+            <thead><tr><th>Flight</th><th>Status</th><th>Altitude</th><th>Speed</th><th>Distance</th><th></th></tr></thead>
+            <tbody id="aRows"></tbody>
+          </table>
+        </div>
+        <div class="card__foot">
+          <span class="updated"><span class="dot" aria-hidden="true"></span> <span id="aUpdated"></span></span>
+        </div>
+      </article>
+
+      <section class="help" id="help">
+        <h2>How it works</h2>
+        <div class="help__grid">
+          <div><h3>1 · Type the flight number</h3><p>Use the number on your ticket, like <b>EK600</b> or <b>PK 301</b>. We turn it into the radio callsign planes broadcast (EK600 → UAE600).</p></div>
+          <div><h3>2 · See it live</h3><p>The flight's position, height and speed update every 20 seconds on the map, with a trail of where it has been.</p></div>
+          <div><h3>3 · Not flying yet?</h3><p>Planes only show while their transponder is on, roughly from push-back to landing. For gates, delays and schedules use the FlightAware link.</p></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p>Live data from the <a href="https://opensky-network.org" target="_blank" rel="noopener">OpenSky Network</a>. Coverage depends on ground receivers, so some remote areas may be missing. Not for navigation.</p>
+      <p>Built by <a href="../index.html">Deveign Agency</a>.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
