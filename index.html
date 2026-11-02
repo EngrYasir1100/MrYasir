@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Devign Agency — Graphic Design, Branding &amp; E-commerce</title>
-  <meta name="description" content="Devign Agency is a Top Rated Plus, Top 3% Upwork agency for graphic design, branding, print-on-demand, Shopify, Etsy and WordPress. 500+ projects delivered across 40+ countries.">
-  <meta property="og:title" content="Devign Agency — Design that sells">
-  <meta property="og:description" content="Graphic design, branding, print-on-demand and e-commerce solutions that help brands stand out and sell more.">
+  <title>Devign Agency — Design, E-commerce &amp; Architecture Studio</title>
+  <meta name="description" content="Devign Agency is a Top Rated Plus, Top 3% Upwork agency for branding, print-on-demand, Shopify, Etsy, WordPress websites and architectural 3D visualization.">
+  <meta property="og:title" content="Devign Agency — Design, E-commerce &amp; Architecture Studio">
+  <meta property="og:description" content="Devign Agency is a Top Rated Plus, Top 3% Upwork agency for branding, print-on-demand, Shopify, Etsy, WordPress websites and architectural 3D visualization.">
   <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0b1120">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23f97316'/><text x='16' y='22' font-size='17' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'>D</text></svg>">
-</head>
-<body>
-
-  <!-- TOP BAR -->
+</head><body data-page="home">
+  <a class="skip" href="#main">Skip to content</a>
   <div class="topbar">
     <div class="container topbar__inner">
       <span>🥇 Top Rated Plus · Top 3% Talent on Upwork</span>
@@ -26,138 +25,92 @@
       </span>
     </div>
   </div>
-
-  <!-- HEADER -->
-  <header class="header" id="top">
+  <header class="header">
     <div class="container header__inner">
-      <a href="#top" class="logo">
-        <span class="logo__mark">D</span>
-        <span class="logo__text">Devign<small>Agency</small></span>
-      </a>
+      <a href="index.html" class="logo"><span class="logo__mark">D</span><span class="logo__text">Devign<small>Agency</small></span></a>
       <nav class="nav" id="nav" aria-label="Main">
-        <a href="#top" class="active">Home</a>
-        <a href="#services">Services</a>
-        <a href="#work">Projects</a>
-        <a href="#why">About</a>
-        <a href="#contact">Contact</a>
-        <a href="#contact" class="btn btn--primary btn--sm">Get a Quote</a>
+        <a href="index.html" class="active" aria-current="page">Home</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn btn--primary btn--sm">Get a Quote</a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
-
-  <main>
+  <main id="main">
     <!-- HERO -->
-    <section class="hero">
-      <!-- Animated design line-art background -->
-      <svg class="hero__art" viewBox="0 0 900 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M40 0H0V40" fill="none" stroke="currentColor" stroke-width=".5"/>
-          </pattern>
-        </defs>
-        <rect class="art-grid" width="1800" height="1400" fill="url(#grid)"/>
-
-        <!-- Logo construction circles -->
-        <g class="art art--1">
-          <circle cx="660" cy="190" r="110" pathLength="1"/>
-          <circle cx="600" cy="190" r="68" pathLength="1"/>
-          <circle cx="720" cy="190" r="68" pathLength="1"/>
-          <line x1="520" y1="190" x2="800" y2="190" pathLength="1"/>
-          <line x1="660" y1="60" x2="660" y2="320" pathLength="1"/>
-        </g>
-
-        <!-- Pen tool bezier with anchors -->
-        <g class="art art--2">
-          <path d="M380 520 C 460 380, 560 640, 660 470 S 820 400, 880 520" pathLength="1"/>
-          <line class="handle" x1="380" y1="520" x2="460" y2="380" pathLength="1"/>
-          <line class="handle" x1="660" y1="470" x2="740" y2="340" pathLength="1"/>
-        </g>
-        <g class="anchors">
-          <rect x="374" y="514" width="12" height="12"/>
-          <rect x="654" y="464" width="12" height="12"/>
-          <rect x="874" y="514" width="12" height="12"/>
-          <circle cx="460" cy="380" r="5"/>
-          <circle cx="740" cy="340" r="5"/>
-        </g>
-
-        <!-- T-shirt outline -->
-        <g class="art art--3">
-          <path d="M470 250 l-60 30 l22 50 l28 -12 v110 h120 v-110 l28 12 l22 -50 l-60 -30 c-6 22 -24 34 -50 34 s-44 -12 -50 -34 z" pathLength="1"/>
-        </g>
-
-        <!-- Artboards with crop marks -->
-        <g class="art art--4">
-          <rect x="740" y="560" width="130" height="90" pathLength="1"/>
-          <rect x="560" y="590" width="150" height="60" pathLength="1"/>
-          <path d="M730 560h-14 M740 550v-14 M880 560h14 M870 550v-14" pathLength="1"/>
-        </g>
-
-        <!-- Shopping bag -->
-        <g class="art art--5">
-          <path d="M820 270 h70 l-8 90 h-54 z M835 270 v-12 a20 20 0 0 1 40 0 v12" pathLength="1"/>
-        </g>
-
-        <!-- Moving cursor -->
-        <g class="cursor">
-          <path d="M0 0 L0 22 L6 16 L11 27 L15 25 L10 14 L18 14 Z"/>
-          <rect x="20" y="22" rx="4" width="62" height="20"/>
-          <text x="27" y="36">Devign</text>
-        </g>
-      </svg>
-      <div class="hero__glow" aria-hidden="true"></div>
+    <section class="hero" id="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero__aurora" aria-hidden="true"><span></span><span></span><span></span></div>
 
       <div class="container hero__inner">
-        <span class="kicker">Design &amp; E-commerce Agency · Serving 40+ Countries</span>
-        <h1>Design That Looks Great <br class="br-lg">and <span class="hl">Makes Brands Sell</span></h1>
-
-        <div class="hero__cards">
-          <div class="hcard">
-            <div class="hcard__icon">🎨</div>
-            <h3>Branding &amp; POD Design</h3>
-            <ul>
-              <li>Logo &amp; brand identity</li>
-              <li>Merch by Amazon &amp; Etsy designs</li>
-            </ul>
-            <a href="#services" class="btn btn--primary btn--xs">See Design Services →</a>
+        <div class="hero__content">
+          <span class="kicker">Design · E-commerce · Architecture</span>
+          <h1>Design That Sells.<br>For Your <span class="typed" id="typed" data-words="Brand.|Shopify Store.|Merch Line.|Website.|Etsy Shop.|Dream Home.">Brand.</span><span class="caret" aria-hidden="true"></span></h1>
+          <p class="hero__lead">We're a Top 3% Upwork agency blending creative design, platform expertise and market-driven strategy — helping startups, e-commerce brands and property businesses in 40+ countries stand out and sell more.</p>
+          <div class="hero__cta">
+            <a href="contact.html" class="btn btn--primary btn--lg">Start Your Project →</a>
+            <a href="portfolio.html" class="btn btn--outline btn--lg">View Our Work</a>
           </div>
-          <div class="hcard">
-            <div class="hcard__icon">🛒</div>
-            <h3>Shopify &amp; Etsy Stores</h3>
-            <ul>
-              <li>Conversion-focused store design</li>
-              <li>Listings, SEO titles &amp; mockups</li>
-            </ul>
-            <a href="#services" class="btn btn--primary btn--xs" data-tab="ecom">See E-commerce Services →</a>
-          </div>
+          <ul class="hero__trust">
+            <li><strong>100%</strong> Job Success</li>
+            <li><strong>500+</strong> Projects</li>
+            <li><strong>★ 5.0</strong> Client Rating</li>
+          </ul>
         </div>
 
-        <p class="hero__lead">At Devign Agency, we blend creative design, platform expertise and market-driven strategy to help startups, e-commerce brands and scaling businesses stand out and sell more.</p>
+        <!-- Animated design workspace -->
+        <div class="scene" id="scene" aria-hidden="true">
+          <div class="win" data-depth="10">
+            <div class="win__bar"><i></i><i></i><i></i><span class="win__url">yourbrand.com</span></div>
+            <div class="win__body">
+              <div class="b b--nav"><span class="b__logo">●</span><span class="b__links"><i></i><i></i><i></i></span><span class="b__cart">🛒<em>0</em></span></div>
+              <div class="b b--hero">
+                <div class="b__copy"><i class="l1"></i><i class="l2"></i><span class="b__btn">Shop now</span></div>
+                <svg class="b__shirt" viewBox="-150 -120 300 250"><path d="M-70 -110 L-140 -80 L-115 -20 L-85 -32 L-85 120 L85 120 L85 -32 L115 -20 L140 -80 L70 -110 C60 -85 35 -72 0 -72 C-35 -72 -60 -85 -70 -110 Z"/><text x="0" y="20" text-anchor="middle">DEVIGN</text></svg>
+              </div>
+              <div class="b b--grid">
+                <div class="p"><span></span><i></i></div>
+                <div class="p"><span></span><i></i></div>
+                <div class="p"><span></span><i></i></div>
+              </div>
+            </div>
+            <div class="win__cursor"><svg viewBox="0 0 20 28"><path d="M0 0 L0 22 L6 16 L11 27 L15 25 L10 14 L18 14 Z"/></svg></div>
+          </div>
 
-        <div class="hero__cta">
-          <a href="#contact" class="btn btn--primary">Get a Quote →</a>
-          <a href="#work" class="btn btn--outline">View Projects</a>
-        </div>
-
-        <div class="hero__badge">
-          <div class="hero__badge-icon">🏆</div>
-          <div><strong>Top 3%</strong><span>Talent on Upwork</span></div>
+          <div class="fc fc--logo" data-depth="28">
+            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/><circle cx="35" cy="50" r="24"/><circle cx="65" cy="50" r="24"/><path d="M30 62 L50 30 L70 62 Z"/></svg>
+            <span>Brand Identity</span>
+          </div>
+          <div class="fc fc--shirt" data-depth="40">
+            <svg viewBox="-150 -120 300 250"><path d="M-70 -110 L-140 -80 L-115 -20 L-85 -32 L-85 120 L85 120 L85 -32 L115 -20 L140 -80 L70 -110 C60 -85 35 -72 0 -72 C-35 -72 -60 -85 -70 -110 Z"/></svg>
+            <div class="swatches"><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="fc fc--plan" data-depth="22">
+            <svg viewBox="0 0 120 80"><rect x="4" y="4" width="112" height="72"/><path d="M50 4 V44 H4 M50 44 H80 V76 M80 4 V30"/></svg>
+            <span>Floor Plan</span>
+          </div>
+          <div class="fc fc--order" data-depth="34">
+            <span class="fc__ico">🛍️</span>
+            <div><strong>New order!</strong><small>Graphic Tee · $29.00</small></div>
+          </div>
+          <div class="fc fc--rate" data-depth="18">
+            <span class="stars">★★★★★</span><strong>5.0</strong>
+          </div>
         </div>
       </div>
+      <a href="#stats" class="hero__scroll" aria-label="Scroll down"><span></span></a>
     </section>
 
     <!-- TICKER -->
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker__track">
-        <span>Logo Design</span><span>Brand Identity</span><span>Print-on-Demand</span><span>Merch by Amazon</span><span>Etsy Listings</span><span>Shopify Stores</span><span>WordPress Websites</span><span>Packaging</span><span>Social Media Ads</span><span>T-Shirt Design</span>
-        <span>Logo Design</span><span>Brand Identity</span><span>Print-on-Demand</span><span>Merch by Amazon</span><span>Etsy Listings</span><span>Shopify Stores</span><span>WordPress Websites</span><span>Packaging</span><span>Social Media Ads</span><span>T-Shirt Design</span>
-      </div>
-    </div>
+    <div class="ticker" aria-hidden="true"><div class="ticker__track"><span>Logo Design</span><span>Brand Identity</span><span>Print-on-Demand</span><span>Merch by Amazon</span><span>Shopify Stores</span><span>Etsy Listings</span><span>WordPress Websites</span><span>3D Rendering</span><span>Floor Plans</span><span>Packaging</span><span>Social Media Ads</span><span>UI/UX Design</span><span>Logo Design</span><span>Brand Identity</span><span>Print-on-Demand</span><span>Merch by Amazon</span><span>Shopify Stores</span><span>Etsy Listings</span><span>WordPress Websites</span><span>3D Rendering</span><span>Floor Plans</span><span>Packaging</span><span>Social Media Ads</span><span>UI/UX Design</span></div></div>
 
     <!-- STATS -->
-    <section class="stats">
+    <section class="stats" id="stats">
       <div class="container stats__grid">
         <div class="stat"><strong><span data-count="500">500</span><em>+</em></strong><span>Projects Delivered</span></div>
         <div class="stat"><strong><span data-count="40">40</span><em>+</em></strong><span>Countries Served</span></div>
@@ -167,157 +120,296 @@
     </section>
 
     <!-- SERVICES -->
-    <section class="section" id="services">
+    <section class="section">
       <div class="container">
         <div class="head-row">
           <div>
             <span class="eyebrow">What we do</span>
             <h2>Our <span class="hl">Services</span></h2>
           </div>
-          <p>High-converting visual design and e-commerce solutions — results, not just visuals.</p>
+          <p>Eight specialist services under one roof — so your brand, store, website and spaces all look and sell their best.</p>
         </div>
-
-        <div class="tabs" role="tablist">
-          <button class="tab active" role="tab" aria-selected="true" data-tab="design">Design &amp; Branding <b>3</b></button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="ecom">E-commerce &amp; Web <b>3</b></button>
-        </div>
-
-        <div class="cards" data-panel="design">
-          <article class="card">
+        <div class="cards cards--4">
+          <a class="card" href="services.html#branding">
             <span class="card__num">01</span>
             <div class="card__icon">🎨</div>
             <h3>Graphic Design &amp; Branding</h3>
-            <p>Logo design, brand identity, packaging and marketing visuals that make your brand instantly recognisable.</p>
-          </article>
-          <article class="card">
+            <p>Logos, brand identity, packaging and marketing visuals that make your brand instantly recognisable.</p>
+            <span class="card__more">Learn more →</span>
+          </a>
+          <a class="card" href="services.html#pod">
             <span class="card__num">02</span>
             <div class="card__icon">👕</div>
-            <h3>Print-on-Demand Design</h3>
-            <p>T-shirt and merch designs optimised for Merch by Amazon, Etsy and other POD platforms.</p>
-          </article>
-          <article class="card">
+            <h3>Print-on-Demand &amp; Apparel</h3>
+            <p>T-shirt and merch designs optimised for Merch by Amazon, Etsy and every major POD platform.</p>
+            <span class="card__more">Learn more →</span>
+          </a>
+          <a class="card" href="services.html#shopify">
             <span class="card__num">03</span>
-            <div class="card__icon">📣</div>
-            <h3>Digital Marketing Creatives</h3>
-            <p>Social media ads, banners and promotional graphics designed to convert.</p>
-          </article>
-        </div>
-        <div class="cards" data-panel="ecom" hidden>
-          <article class="card">
+            <div class="card__icon">🛍️</div>
+            <h3>Shopify Store Design</h3>
+            <p>Shopify stores, product pages and conversion-focused layouts that turn visitors into buyers.</p>
+            <span class="card__more">Learn more →</span>
+          </a>
+          <a class="card" href="services.html#ecommerce">
             <span class="card__num">04</span>
             <div class="card__icon">🛒</div>
-            <h3>E-commerce Design</h3>
-            <p>Shopify store design, product pages and conversion-focused layouts that turn visitors into buyers.</p>
-          </article>
-          <article class="card">
+            <h3>E-commerce &amp; Marketplaces</h3>
+            <p>Etsy and Amazon listing design, SEO titles, thumbnails and mockups that get products found.</p>
+            <span class="card__more">Learn more →</span>
+          </a>
+          <a class="card" href="services.html#web">
             <span class="card__num">05</span>
-            <div class="card__icon">🔎</div>
-            <h3>Marketplace Optimisation</h3>
-            <p>Etsy listing design, SEO titles, thumbnails and mockups that get your products found and clicked.</p>
-          </article>
-          <article class="card">
-            <span class="card__num">06</span>
             <div class="card__icon">💻</div>
-            <h3>Website Design</h3>
-            <p>Clean, responsive, user-friendly WordPress and Shopify websites and stores.</p>
-          </article>
+            <h3>Website Design &amp; Development</h3>
+            <p>Clean, fast and responsive WordPress, Shopify and custom websites built to grow your business.</p>
+            <span class="card__more">Learn more →</span>
+          </a>
+          <a class="card" href="services.html#architecture">
+            <span class="card__num">06</span>
+            <div class="card__icon">🏛️</div>
+            <h3>Architecture &amp; 3D Visualization</h3>
+            <p>Architectural drawings, 2D floor plans and photo-real 3D exterior and interior renders.</p>
+            <span class="card__more">Learn more →</span>
+          </a>
+          <a class="card" href="services.html#marketing">
+            <span class="card__num">07</span>
+            <div class="card__icon">📣</div>
+            <h3>Digital Marketing Creatives</h3>
+            <p>Social media ads, banners and promotional graphics designed to stop the scroll and convert.</p>
+            <span class="card__more">Learn more →</span>
+          </a>
+          <a class="card" href="services.html#uiux">
+            <span class="card__num">08</span>
+            <div class="card__icon">📱</div>
+            <h3>UI/UX &amp; Product Design</h3>
+            <p>Web and mobile app interfaces that are beautiful, intuitive and ready for development.</p>
+            <span class="card__more">Learn more →</span>
+          </a>
         </div>
+        <a href="services.html" class="link-more">View all services &amp; skills →</a>
       </div>
     </section>
 
-    <!-- PORTFOLIO -->
-    <section class="section section--alt" id="work">
+    <!-- FEATURED WORK -->
+    <section class="section section--alt">
       <div class="container">
         <div class="head-row">
           <div>
             <span class="eyebrow">Our portfolio</span>
-            <h2>Notable <span class="hl">Projects</span></h2>
+            <h2>Featured <span class="hl">Projects</span></h2>
           </div>
-          <p>A look at recent work. See our full portfolio on Upwork.</p>
+          <p>A selection of client work and concept pieces across branding, e-commerce, web and architecture.</p>
         </div>
-        <!-- To show a project image, add <img src="assets/img/your-image.jpg" alt="..."> inside .work__thumb -->
         <div class="work">
-          <article class="work__item">
-            <div class="work__thumb t1">
-              <span class="pill">E-commerce</span><span class="pill pill--dark">Shopify · POD</span>
-              <span class="work__mark">🛍️</span>
-            </div>
-            <div class="work__info">
-              <div>
-                <h3>End-to-End Shopify Store + POD Designs + Product Listings</h3>
-                <p>Shopify setup and design, print-on-demand artwork and complete product listings.</p>
+          <article class="work__item" data-cat="shopify">
+            <button class="work__open" type="button" aria-label="View project: End-to-End Shopify Store + POD Designs + Product Listings">
+              <div class="work__thumb">
+                <img src="assets/img/portfolio/shopify-pod-store.svg" alt="End-to-End Shopify Store + POD Designs + Product Listings" loading="lazy" width="800" height="500">
+                <span class="pill">Shopify · POD</span><span class="pill pill--ok">Client project</span>
               </div>
-              <a class="arrow" href="https://www.upwork.com/agencies/1889365964050848512/" target="_blank" rel="noopener" aria-label="View on Upwork">→</a>
-            </div>
+              <div class="work__info">
+                <div>
+                  <h3>End-to-End Shopify Store + POD Designs + Product Listings</h3>
+                  <p>A complete store build: Shopify setup and design, print-on-demand artwork and fully written product listings.</p>
+                </div>
+                <span class="arrow" aria-hidden="true">→</span>
+              </div>
+            </button>
+            <template class="work__details">
+              <img src="assets/img/portfolio/shopify-pod-store.svg" alt="End-to-End Shopify Store + POD Designs + Product Listings" width="800" height="500">
+              <div class="modal__body">
+                <div class="modal__tags"><span class="pill">Shopify · POD</span><span class="pill pill--ok">Client project</span></div>
+                <h3>End-to-End Shopify Store + POD Designs + Product Listings</h3>
+                <p>A complete store build: Shopify setup and design, print-on-demand artwork and fully written product listings.</p>
+                <h4>Scope</h4>
+                <ul class="checks"><li>Shopify store setup &amp; theme design</li><li>Print-on-demand T-shirt artwork</li><li>Product listings &amp; descriptions</li></ul>
+                <h4>Tools</h4>
+                <div class="chips"><span>Shopify</span><span>Printful</span><span>Illustrator</span></div>
+                <a href="contact.html" class="btn btn--primary">Start a similar project →</a>
+              </div>
+            </template>
           </article>
-          <article class="work__item">
-            <div class="work__thumb t2">
-              <span class="pill">Apparel Design</span><span class="pill pill--dark">Custom Graphics</span>
-              <span class="work__mark">👚</span>
-            </div>
-            <div class="work__info">
-              <div>
+          <article class="work__item" data-cat="apparel">
+            <button class="work__open" type="button" aria-label="View project: Women's T-Shirt Design | Custom Apparel Graphics">
+              <div class="work__thumb">
+                <img src="assets/img/portfolio/womens-tshirt.svg" alt="Women's T-Shirt Design | Custom Apparel Graphics" loading="lazy" width="800" height="500">
+                <span class="pill">Apparel Design</span><span class="pill pill--ok">Client project</span>
+              </div>
+              <div class="work__info">
+                <div>
+                  <h3>Women's T-Shirt Design | Custom Apparel Graphics</h3>
+                  <p>Custom apparel graphics for a women's T-shirt line, prepared and ready for print.</p>
+                </div>
+                <span class="arrow" aria-hidden="true">→</span>
+              </div>
+            </button>
+            <template class="work__details">
+              <img src="assets/img/portfolio/womens-tshirt.svg" alt="Women's T-Shirt Design | Custom Apparel Graphics" width="800" height="500">
+              <div class="modal__body">
+                <div class="modal__tags"><span class="pill">Apparel Design</span><span class="pill pill--ok">Client project</span></div>
                 <h3>Women's T-Shirt Design | Custom Apparel Graphics</h3>
                 <p>Custom apparel graphics for a women's T-shirt line, prepared and ready for print.</p>
+                <h4>Scope</h4>
+                <ul class="checks"><li>Custom graphic design</li><li>Colour variations</li><li>Print-ready files</li></ul>
+                <h4>Tools</h4>
+                <div class="chips"><span>Illustrator</span><span>Photoshop</span></div>
+                <a href="contact.html" class="btn btn--primary">Start a similar project →</a>
               </div>
-              <a class="arrow" href="https://www.upwork.com/agencies/1889365964050848512/" target="_blank" rel="noopener" aria-label="View on Upwork">→</a>
-            </div>
+            </template>
+          </article>
+          <article class="work__item" data-cat="branding">
+            <button class="work__open" type="button" aria-label="View project: Kahve Roasters — Coffee Brand Identity">
+              <div class="work__thumb">
+                <img src="assets/img/portfolio/coffee-brand.svg" alt="Kahve Roasters — Coffee Brand Identity" loading="lazy" width="800" height="500">
+                <span class="pill">Brand Identity</span><span class="pill pill--dark">Concept</span>
+              </div>
+              <div class="work__info">
+                <div>
+                  <h3>Kahve Roasters — Coffee Brand Identity</h3>
+                  <p>A warm, premium identity for a specialty coffee roaster: logo, stationery and packaging.</p>
+                </div>
+                <span class="arrow" aria-hidden="true">→</span>
+              </div>
+            </button>
+            <template class="work__details">
+              <img src="assets/img/portfolio/coffee-brand.svg" alt="Kahve Roasters — Coffee Brand Identity" width="800" height="500">
+              <div class="modal__body">
+                <div class="modal__tags"><span class="pill">Brand Identity</span><span class="pill pill--dark">Concept</span></div>
+                <h3>Kahve Roasters — Coffee Brand Identity</h3>
+                <p>A warm, premium identity for a specialty coffee roaster: logo, stationery and packaging.</p>
+                <h4>Scope</h4>
+                <ul class="checks"><li>Logo &amp; brand mark</li><li>Business cards &amp; stationery</li><li>Coffee bag packaging</li></ul>
+                <h4>Tools</h4>
+                <div class="chips"><span>Illustrator</span><span>Photoshop</span></div>
+                <a href="contact.html" class="btn btn--primary">Start a similar project →</a>
+              </div>
+            </template>
+          </article>
+          <article class="work__item" data-cat="marketplace">
+            <button class="work__open" type="button" aria-label="View project: Boho Wall Art — Etsy Listing Images">
+              <div class="work__thumb">
+                <img src="assets/img/portfolio/etsy-boho-listings.svg" alt="Boho Wall Art — Etsy Listing Images" loading="lazy" width="800" height="500">
+                <span class="pill">Etsy</span><span class="pill pill--dark">Concept</span>
+              </div>
+              <div class="work__info">
+                <div>
+                  <h3>Boho Wall Art — Etsy Listing Images</h3>
+                  <p>A consistent set of listing images and thumbnails for a digital wall-art Etsy shop.</p>
+                </div>
+                <span class="arrow" aria-hidden="true">→</span>
+              </div>
+            </button>
+            <template class="work__details">
+              <img src="assets/img/portfolio/etsy-boho-listings.svg" alt="Boho Wall Art — Etsy Listing Images" width="800" height="500">
+              <div class="modal__body">
+                <div class="modal__tags"><span class="pill">Etsy</span><span class="pill pill--dark">Concept</span></div>
+                <h3>Boho Wall Art — Etsy Listing Images</h3>
+                <p>A consistent set of listing images and thumbnails for a digital wall-art Etsy shop.</p>
+                <h4>Scope</h4>
+                <ul class="checks"><li>Listing thumbnails</li><li>Room mockups</li><li>SEO titles &amp; tags</li></ul>
+                <h4>Tools</h4>
+                <div class="chips"><span>Photoshop</span><span>Canva</span></div>
+                <a href="contact.html" class="btn btn--primary">Start a similar project →</a>
+              </div>
+            </template>
+          </article>
+          <article class="work__item" data-cat="web">
+            <button class="work__open" type="button" aria-label="View project: Summit Law — WordPress Website">
+              <div class="work__thumb">
+                <img src="assets/img/portfolio/wordpress-law-firm.svg" alt="Summit Law — WordPress Website" loading="lazy" width="800" height="500">
+                <span class="pill">WordPress</span><span class="pill pill--dark">Concept</span>
+              </div>
+              <div class="work__info">
+                <div>
+                  <h3>Summit Law — WordPress Website</h3>
+                  <p>A trustworthy, conversion-focused WordPress site for a law firm, built with Elementor.</p>
+                </div>
+                <span class="arrow" aria-hidden="true">→</span>
+              </div>
+            </button>
+            <template class="work__details">
+              <img src="assets/img/portfolio/wordpress-law-firm.svg" alt="Summit Law — WordPress Website" width="800" height="500">
+              <div class="modal__body">
+                <div class="modal__tags"><span class="pill">WordPress</span><span class="pill pill--dark">Concept</span></div>
+                <h3>Summit Law — WordPress Website</h3>
+                <p>A trustworthy, conversion-focused WordPress site for a law firm, built with Elementor.</p>
+                <h4>Scope</h4>
+                <ul class="checks"><li>Website design</li><li>Elementor build</li><li>Contact &amp; booking forms</li></ul>
+                <h4>Tools</h4>
+                <div class="chips"><span>WordPress</span><span>Elementor</span></div>
+                <a href="contact.html" class="btn btn--primary">Start a similar project →</a>
+              </div>
+            </template>
+          </article>
+          <article class="work__item" data-cat="architecture">
+            <button class="work__open" type="button" aria-label="View project: Modern Villa — 3D Exterior Render">
+              <div class="work__thumb">
+                <img src="assets/img/portfolio/villa-exterior.svg" alt="Modern Villa — 3D Exterior Render" loading="lazy" width="800" height="500">
+                <span class="pill">3D Exterior</span><span class="pill pill--dark">Concept</span>
+              </div>
+              <div class="work__info">
+                <div>
+                  <h3>Modern Villa — 3D Exterior Render</h3>
+                  <p>A photo-real exterior visualization of a contemporary two-storey villa.</p>
+                </div>
+                <span class="arrow" aria-hidden="true">→</span>
+              </div>
+            </button>
+            <template class="work__details">
+              <img src="assets/img/portfolio/villa-exterior.svg" alt="Modern Villa — 3D Exterior Render" width="800" height="500">
+              <div class="modal__body">
+                <div class="modal__tags"><span class="pill">3D Exterior</span><span class="pill pill--dark">Concept</span></div>
+                <h3>Modern Villa — 3D Exterior Render</h3>
+                <p>A photo-real exterior visualization of a contemporary two-storey villa.</p>
+                <h4>Scope</h4>
+                <ul class="checks"><li>3D modelling</li><li>Materials &amp; lighting</li><li>Final render</li></ul>
+                <h4>Tools</h4>
+                <div class="chips"><span>SketchUp</span><span>Lumion</span></div>
+                <a href="contact.html" class="btn btn--primary">Start a similar project →</a>
+              </div>
+            </template>
           </article>
         </div>
-        <a href="https://www.upwork.com/agencies/1889365964050848512/" target="_blank" rel="noopener" class="link-more">View all projects on Upwork →</a>
+        <a href="portfolio.html" class="link-more">View all projects →</a>
       </div>
     </section>
 
-    <!-- WHY US -->
-    <section class="section dark" id="why">
+    <!-- WHY -->
+    <section class="section dark">
       <div class="container">
         <span class="eyebrow">Our advantage</span>
         <h2>Why Choose <span class="hl">Devign Agency</span></h2>
         <div class="why">
-          <div class="why__item">
-            <h3>Top 3% Talent</h3>
-            <p>Top Rated Plus on Upwork and recognised among the top 3% of talent globally.</p>
-            <span>01 / 04</span>
-          </div>
-          <div class="why__item">
-            <h3>Design + Selling</h3>
-            <p>We design with conversion and market trends in mind, so your visuals drive sales.</p>
-            <span>02 / 04</span>
-          </div>
-          <div class="why__item">
-            <h3>Production-Ready</h3>
-            <p>High-quality, print- and web-ready files for every platform you sell on.</p>
-            <span>03 / 04</span>
-          </div>
-          <div class="why__item">
-            <h3>Fast &amp; Clear</h3>
-            <p>Clear communication and fast turnaround from first message to final delivery.</p>
-            <span>04 / 04</span>
-          </div>
+          <div class="why__item"><div class="why__ico">🏆</div><h3>Top 3% Talent</h3><p>Top Rated Plus on Upwork and recognised among the top 3% of talent globally.</p><span>01 / 04</span></div>
+          <div class="why__item"><div class="why__ico">📈</div><h3>Design + Selling</h3><p>We design with conversion and market trends in mind, so your visuals drive sales.</p><span>02 / 04</span></div>
+          <div class="why__item"><div class="why__ico">📦</div><h3>Production-Ready</h3><p>High-quality, print-, web- and build-ready files for every platform you use.</p><span>03 / 04</span></div>
+          <div class="why__item"><div class="why__ico">⚡</div><h3>Fast &amp; Clear</h3><p>Clear communication and fast turnaround from first message to final delivery.</p><span>04 / 04</span></div>
         </div>
       </div>
     </section>
 
-    <!-- PROCESS + WORK HISTORY -->
-    <section class="section" id="process">
+    <!-- PROCESS -->
+    <section class="section">
       <div class="container">
         <div class="head-row">
           <div>
             <span class="eyebrow">How we work</span>
             <h2>Simple &amp; <span class="hl">Results-Driven</span></h2>
           </div>
-          <p>Our approach keeps every project focused on your brand, your audience and your sales.</p>
+          <p>Every project follows the same clear path, so you always know what's next.</p>
         </div>
         <ol class="steps">
-          <li class="step"><span class="step__num">01</span><h3>Understand</h3><p>We get to know your brand, your audience and what you need to sell.</p></li>
-          <li class="step"><span class="step__num">02</span><h3>Design</h3><p>Every design is made with conversion and current trends in mind.</p></li>
-          <li class="step"><span class="step__num">03</span><h3>Deliver</h3><p>You receive high-quality, production-ready assets for print and web.</p></li>
-          <li class="step"><span class="step__num">04</span><h3>Support</h3><p>Clear communication and fast turnaround at every step.</p></li>
+          <li class="step"><span class="step__num">01</span><h3>Understand</h3><p>We learn your brand, audience and goals.</p></li>
+          <li class="step"><span class="step__num">02</span><h3>Design</h3><p>Concepts built around conversion and trends.</p></li>
+          <li class="step"><span class="step__num">03</span><h3>Refine</h3><p>Revisions until it's exactly right.</p></li>
+          <li class="step"><span class="step__num">04</span><h3>Deliver</h3><p>Production-ready files and ongoing support.</p></li>
         </ol>
       </div>
     </section>
 
-    <section class="section section--alt" id="reviews">
+    <!-- TOOLS + RATINGS -->
+    <section class="section section--alt">
       <div class="container">
         <div class="head-row">
           <div>
@@ -343,106 +435,50 @@
             <figcaption>Logo &amp; Apparel · December 2025</figcaption>
           </figure>
         </div>
-
         <div class="platforms">
-          <span class="platforms__label">Platforms we work with</span>
-          <ul>
-            <li>Shopify</li><li>Etsy</li><li>Merch by Amazon</li><li>WordPress</li><li>Upwork</li>
-          </ul>
+          <span class="platforms__label">Platforms &amp; tools we master</span>
+          <ul><li>Shopify</li><li>Etsy</li><li>Merch by Amazon</li><li>WordPress</li><li>WooCommerce</li><li>Elementor</li><li>Figma</li><li>Adobe Illustrator</li><li>Photoshop</li><li>AutoCAD</li><li>SketchUp</li><li>Lumion</li><li>3ds Max</li><li>Revit</li><li>Printful</li><li>Canva</li></ul>
         </div>
       </div>
     </section>
 
-    <!-- AWARDS -->
-    <section class="section" id="awards">
-      <div class="container">
-        <div class="head-row">
-          <div>
-            <span class="eyebrow">Recognition</span>
-            <h2>Awards &amp; <span class="hl">Trust</span></h2>
-          </div>
-          <p>Working with large, medium, small and very small businesses worldwide.</p>
-        </div>
-        <div class="awards">
-          <div class="award"><div class="award__icon">🏆</div><h3>Top 3% Talent on Upwork</h3><p>Recognised among the top 3% of talent globally on Upwork.</p></div>
-          <div class="award"><div class="award__icon">🤝</div><h3>Trusted Partner for Startups &amp; Enterprises</h3><p>Validated by client feedback as a reliable, results-driven partner.</p></div>
-          <div class="award"><div class="award__icon">👕</div><h3>Leading POD Branding Partner</h3><p>Branding and product design for Merch by Amazon and Etsy sellers.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section dark contact" id="contact">
-      <div class="container contact__inner">
-        <div>
-          <span class="eyebrow">Let's talk</span>
-          <h2>Request a <span class="hl">Quote</span></h2>
-          <p>Tell us about your project and we'll get back to you quickly.</p>
-          <ul class="contact__list">
-            <li><span>💼</span><a href="https://www.upwork.com/agencies/1889365964050848512/" target="_blank" rel="noopener">Hire Devign Agency on Upwork</a></li>
-            <li><span>📍</span>Rawalpindi, Pakistan · GMT+5</li>
-            <li><span>👤</span>Yasir A. — Business Manager</li>
-          </ul>
-        </div>
-        <form class="form" id="contactForm" novalidate>
-          <div class="form__row">
-            <label>Name<input type="text" name="name" required autocomplete="name"></label>
-            <label>Email<input type="email" name="email" required autocomplete="email"></label>
-          </div>
-          <label>Service needed
-            <select name="service">
-              <option>Graphic Design &amp; Branding</option>
-              <option>Print-on-Demand Design</option>
-              <option>Shopify / E-commerce Design</option>
-              <option>Etsy / Marketplace Optimisation</option>
-              <option>WordPress Website</option>
-              <option>Digital Marketing Creatives</option>
-              <option>Something else</option>
-            </select>
-          </label>
-          <label>Project details<textarea name="message" rows="4" required></textarea></label>
-          <button type="submit" class="btn btn--primary btn--block">Send Request →</button>
-          <p class="form__status" id="formStatus" role="status"></p>
-        </form>
-      </div>
-    </section>
-
-    <!-- CTA BAND -->
     <section class="cta-band">
       <div class="container cta-band__inner">
-        <h2>Ready to start your project?</h2>
-        <a href="#contact" class="btn btn--dark">Get a Quote →</a>
+        <div>
+          <h2>Ready to start your project?</h2>
+          <p>Tell us what you need — we'll reply with ideas, a timeline and a quote.</p>
+        </div>
+        <a href="contact.html" class="btn btn--dark">Get a Quote →</a>
       </div>
     </section>
   </main>
-
   <footer class="footer">
     <div class="container footer__grid">
       <div>
-        <a href="#top" class="logo"><span class="logo__mark">D</span><span class="logo__text">Devign<small>Agency</small></span></a>
-        <p>High-converting visual design and e-commerce solutions that help brands stand out and sell more.</p>
+        <a href="index.html" class="logo"><span class="logo__mark">D</span><span class="logo__text">Devign<small>Agency</small></span></a>
+        <p>High-converting visual design, e-commerce and architecture visualization that help brands stand out and sell more.</p>
+        <a href="https://www.upwork.com/agencies/1889365964050848512/" target="_blank" rel="noopener" class="footer__badge">🥇 Top Rated Plus · Top 3% on Upwork</a>
       </div>
       <div>
         <h4>Quick Links</h4>
-        <a href="#top">Home</a><a href="#services">Services</a><a href="#work">Projects</a><a href="#why">About</a><a href="#contact">Contact</a>
+        <a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Projects</a><a href="about.html">About</a><a href="contact.html">Contact</a>
       </div>
       <div>
         <h4>Services</h4>
-        <a href="#services">Branding &amp; Logo</a><a href="#services">Print-on-Demand</a><a href="#services">Shopify Design</a><a href="#services">Etsy Optimisation</a><a href="#services">WordPress Websites</a>
+        <a href="services.html#branding">Graphic Design &amp; Branding</a><a href="services.html#pod">Print-on-Demand &amp; Apparel</a><a href="services.html#shopify">Shopify Store Design</a><a href="services.html#ecommerce">E-commerce &amp; Marketplaces</a><a href="services.html#web">Website Design &amp; Development</a><a href="services.html#architecture">Architecture &amp; 3D Visualization</a>
       </div>
       <div>
         <h4>Contact</h4>
-        <span>Rawalpindi, Pakistan</span>
+        <span>Rawalpindi, Pakistan · GMT+5</span>
         <a href="https://www.upwork.com/agencies/1889365964050848512/" target="_blank" rel="noopener">Upwork Agency Profile</a>
-        <a href="#contact" class="btn btn--primary btn--xs">Get a Quote</a>
+        <a href="contact.html" class="btn btn--primary btn--xs">Get a Quote</a>
       </div>
     </div>
     <div class="container footer__bottom">
-      <span>© <span id="year"></span> Devign Agency. All rights reserved.</span>
-      <span>Top Rated Plus · Top 3% on Upwork</span>
+      <span>© <span id="year">2026</span> Devign Agency. All rights reserved.</span>
+      <span>Design · E-commerce · Architecture</span>
     </div>
   </footer>
-
   <script src="assets/js/main.js"></script>
 </body>
 </html>
