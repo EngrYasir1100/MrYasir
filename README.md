@@ -12,7 +12,9 @@ A fast, responsive multi-page website for Deveign Agency. Plain HTML, CSS and Ja
 | `about.html` | Story, values, awards, team, client focus |
 | `contact.html` | Quote form, contact details, FAQ |
 
-Styles are in `assets/css/styles.css` and scripts in `assets/js/main.js`.
+Styles are in `assets/css/styles.css` and scripts in `assets/js/main.js`. Pages link them with a version
+(`styles.css?v=…`, `main.js?v=…`); change that number on all pages after editing either file, so visitors'
+browsers load the new version instead of a cached copy.
 Brand colours are at the top of the stylesheet (`--orange`, `--navy`).
 
 ## Preview locally
