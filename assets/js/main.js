@@ -1,5 +1,5 @@
 /* Devign Agency — site scripts */
-document.documentElement.classList.add('js');
+document.documentElement.classList.add('js'); // also set early in <head>
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -53,10 +53,15 @@ $$('.hero-canvas').forEach((canvas) => {
       const px = x + (d ? (dx / d) * push : 0);
       const py = y + (d ? (dy / d) * push : 0);
       const r = 0.9 + g * 1.8;
+      // Brand colours: orange at the centre, amber further out, a blue halo beyond
       if (g > 0.02) {
-        ctx.fillStyle = `rgba(249, ${Math.round(115 + 60 * (1 - g))}, 22, ${0.15 + g * 0.85})`;
+        const r1 = Math.round(214 + 13 * (1 - g)), g1 = Math.round(88 + 50 * (1 - g)), b1 = Math.round(46 + 8 * (1 - g));
+        ctx.fillStyle = `rgba(${r1}, ${g1}, ${b1}, ${0.15 + g * 0.85})`;
+      } else if (d < R * 1.7) {
+        const h = 1 - (d - R) / (R * 0.7);
+        ctx.fillStyle = `rgba(72, 108, 230, ${0.08 + h * 0.32})`;
       } else {
-        ctx.fillStyle = `rgba(148, 163, 184, ${0.07 + wave * 0.08})`;
+        ctx.fillStyle = `rgba(170, 170, 185, ${0.06 + wave * 0.07})`;
       }
       ctx.beginPath();
       ctx.arc(px, py, r, 0, Math.PI * 2);
@@ -154,7 +159,7 @@ if (typed && !reduceMotion) {
 }
 
 /* ---------- Scroll reveal + counters ---------- */
-const revealEls = $$('.stat, .card, .work__item, .why__item, .step, .review, .award, .head-row, .svc, .info-card, .focus > div, .facts > div');
+const revealEls = $$('.brandband, .stat, .card, .work__item, .why__item, .step, .review, .award, .head-row, .svc, .info-card, .focus > div, .facts > div');
 const counters = $$('[data-count]');
 const countUp = (el) => {
   const target = Number(el.dataset.count);
@@ -174,6 +179,8 @@ if ('IntersectionObserver' in window && !reduceMotion) {
       const sibs = [...e.target.parentElement.children].filter((c) => c.classList.contains('reveal'));
       e.target.style.transitionDelay = `${Math.min(sibs.indexOf(e.target), 5) * 70}ms`;
       e.target.classList.add('visible');
+      const t = e.target;
+      setTimeout(() => { t.style.transitionDelay = ''; t.classList.add('settled'); }, 1300);
       io.unobserve(e.target);
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
@@ -291,6 +298,73 @@ if (form) {
       statusEl.classList.add('err');
     }
   });
+}
+
+/* ---------- Scroll progress, header state, back-to-top ---------- */
+const progressBar = $('#progressBar');
+const header = $('.header');
+const toTop = $('#toTop');
+const toTopRing = $('#toTopRing');
+const onScrollUI = () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+  if (progressBar) progressBar.style.transform = `scaleX(${p})`;
+  if (toTopRing) toTopRing.style.strokeDashoffset = String(100 - p * 100);
+  if (toTop) toTop.classList.toggle('show', window.scrollY > 600);
+  if (header) header.classList.toggle('scrolled', window.scrollY > 20);
+};
+window.addEventListener('scroll', onScrollUI, { passive: true });
+window.addEventListener('resize', onScrollUI);
+onScrollUI();
+if (toTop) toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+
+/* ---------- Card spotlight + 3D tilt ---------- */
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (finePointer && !reduceMotion) {
+  $$('.card, .work__item, .award, .info-card, .step, .review, .why__item, .focus > div').forEach((el) => {
+    const tilt = el.matches('.card, .work__item, .why__item, .award');
+    if (tilt) el.classList.add('tilt');
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      el.style.setProperty('--mx', `${x}px`);
+      el.style.setProperty('--my', `${y}px`);
+      if (tilt) {
+        const rx = ((y / r.height) - 0.5) * -6;
+        const ry = ((x / r.width) - 0.5) * 6;
+        el.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-5px)`;
+      }
+    });
+    el.addEventListener('pointerleave', () => {
+      el.style.removeProperty('--mx');
+      el.style.removeProperty('--my');
+      el.style.transform = '';
+    });
+  });
+
+  // Magnetic buttons
+  $$('.btn--lg, .hero__cta .btn, .cta-band .btn').forEach((b) => {
+    b.addEventListener('pointermove', (e) => {
+      const r = b.getBoundingClientRect();
+      b.style.translate = `${(e.clientX - r.left - r.width / 2) * 0.18}px ${(e.clientY - r.top - r.height / 2) * 0.25}px`;
+    });
+    b.addEventListener('pointerleave', () => { b.style.translate = ''; });
+  });
+}
+
+/* ---------- Smooth page transitions between site pages ---------- */
+if (!reduceMotion) {
+  $$('a[href$=".html"], a[href*=".html#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
+      const url = new URL(a.href, location.href);
+      if (url.pathname === location.pathname) return; // same-page anchors scroll normally
+      e.preventDefault();
+      document.body.classList.add('leaving');
+      setTimeout(() => { location.href = a.href; }, 220);
+    });
+  });
+  window.addEventListener('pageshow', (e) => { if (e.persisted) document.body.classList.remove('leaving'); });
 }
 
 /* ---------- Footer year ---------- */
