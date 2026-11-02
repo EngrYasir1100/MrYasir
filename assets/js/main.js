@@ -1,4 +1,4 @@
-/* Devign Agency — site scripts */
+/* Deveign Agency — site scripts */
 document.documentElement.classList.add('js'); // also set early in <head>
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (s, el = document) => el.querySelector(s);

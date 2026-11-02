@@ -1,9 +1,9 @@
 /* =========================================================
-   Devign Agency — styles
+   Deveign Agency — styles
    Brand colours: change --orange / --navy to re-theme the site
    ========================================================= */
 :root {
-  /* Brand colours (from the Devign logo) */
+  /* Brand colours (from the Deveign logo) */
   --orange: #d6582e;
   --orange-2: #e38a36;      /* amber */
   --orange-dark: #b94620;
@@ -670,4 +670,20 @@ html:not(.js) .head-row h2::after { transform: scaleX(1); }
   .js .deco .d { stroke-dashoffset: 0; transition: none; }
   .js .deco .dot, .js .deco text { opacity: 1; }
   .deco--spin, .deco--float { animation: none; }
+}
+
+/* Brand banner rebuilt in HTML (about page) */
+.brandmark { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(16px, 3vw, 40px); max-width: 1100px; margin: 0 auto; color: #fff; }
+.brandmark__badge { display: grid; font-family: "Libre Baskerville", Georgia, serif; font-weight: 700; line-height: 1.05; font-size: clamp(.9rem, 1.7vw, 1.5rem); }
+.brandmark__badge em { font-style: normal; color: var(--amber); }
+.brandmark__badge strong { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; color: #6fda44; letter-spacing: -.02em; font-size: 1.15em; }
+.brandmark__word { font-weight: 800; font-size: clamp(3rem, 11vw, 9rem); line-height: .9; letter-spacing: -.02em; text-align: center; background: linear-gradient(100deg, #f1cfc1 0%, #e9a585 22%, #d6582e 60%, #c9481f 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.brandmark__tag { display: grid; gap: .35em; padding-left: clamp(14px, 2vw, 28px); border-left: 1px solid rgba(255,255,255,.35); font-family: "Libre Baskerville", Georgia, serif; font-weight: 700; font-size: clamp(.85rem, 1.6vw, 1.4rem); white-space: nowrap; }
+.brandmark__tag em { font-style: normal; }
+.js .brandband.reveal .brandmark { opacity: 0; transform: scale(.96); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.js .brandband.reveal.visible .brandmark { opacity: 1; transform: none; }
+@media (max-width: 760px) {
+  .brandmark { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .brandmark__badge { grid-auto-flow: column; gap: .4em; align-items: baseline; }
+  .brandmark__tag { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,.3); padding-top: 12px; }
 }

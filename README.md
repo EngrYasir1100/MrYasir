@@ -1,6 +1,6 @@
-# Devign Agency Website
+# Deveign Agency Website
 
-A fast, responsive multi-page website for Devign Agency. Plain HTML, CSS and JavaScript, with no build step.
+A fast, responsive multi-page website for Deveign Agency. Plain HTML, CSS and JavaScript, with no build step.
 
 ## Pages
 
@@ -40,7 +40,22 @@ Until it's configured, the form sends visitors to the Upwork profile. In `assets
 - set `CONTACT_EMAIL` to open the visitor's email app with the message filled in, or
 - create a free form at https://formspree.io and paste its URL into `FORM_ENDPOINT` to receive messages directly.
 
-## Publish with GitHub Pages
+## Domain: deveignagency.com
 
-Repository **Settings → Pages → Build and deployment**: Source "Deploy from a branch", choose the branch and
-`/ (root)`, then Save. The site goes live at `https://<username>.github.io/<repo>/`.
+The site is served by GitHub Pages at **https://deveignagency.com**. The `CNAME` file in the repository
+root tells GitHub Pages which domain to use, so don't delete it.
+
+DNS records at the domain registrar:
+
+| Type | Name | Value |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `engryasir1100.github.io` |
+
+GitHub settings: **Settings → Pages**, source "Deploy from a branch" (the site's branch, `/ (root)`),
+custom domain `deveignagency.com`, then tick **Enforce HTTPS** once the certificate is ready.
+
+`sitemap.xml` and `robots.txt` help search engines find every page.
