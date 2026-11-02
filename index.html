@@ -50,7 +50,7 @@
       <div class="container hero__inner">
         <div class="hero__content">
           <span class="kicker">Design · E-commerce · Architecture</span>
-          <h1>Design That Sells.<br>For Your <span class="typed" id="typed" data-words="Brand.|Shopify Store.|Merch Line.|Website.|Etsy Shop.|Dream Home.">Brand.</span><span class="caret" aria-hidden="true"></span></h1>
+          <h1>Design That Sells.<br>For Your <span class="typed" id="typed" data-words="Brand.|Shopify Store.|Merch Line.|Website.|Etsy Shop.|Dream Home.|Ad Campaign.|Mobile App.">Brand.</span><span class="caret" aria-hidden="true"></span></h1>
           <p class="hero__lead">We're a Top 3% Upwork agency blending creative design, platform expertise and market-driven strategy — helping startups, e-commerce brands and property businesses in 40+ countries stand out and sell more.</p>
           <div class="hero__cta">
             <a href="contact.html" class="btn btn--primary btn--lg">Start Your Project →</a>
@@ -63,43 +63,88 @@
           </ul>
         </div>
 
-        <!-- Animated design workspace -->
-        <div class="scene" id="scene" aria-hidden="true">
-          <div class="win" data-depth="10">
-            <div class="win__bar"><i></i><i></i><i></i><span class="win__url">yourbrand.com</span></div>
-            <div class="win__body">
-              <div class="b b--nav"><span class="b__logo">●</span><span class="b__links"><i></i><i></i><i></i></span><span class="b__cart">🛒<em>0</em></span></div>
-              <div class="b b--hero">
-                <div class="b__copy"><i class="l1"></i><i class="l2"></i><span class="b__btn">Shop now</span></div>
-                <svg class="b__shirt" viewBox="-150 -120 300 250"><path d="M-70 -110 L-140 -80 L-115 -20 L-85 -32 L-85 120 L85 120 L85 -32 L115 -20 L140 -80 L70 -110 C60 -85 35 -72 0 -72 C-35 -72 -60 -85 -70 -110 Z"/><text x="0" y="20" text-anchor="middle">DEVIGN</text></svg>
-              </div>
-              <div class="b b--grid">
-                <div class="p"><span></span><i></i></div>
-                <div class="p"><span></span><i></i></div>
-                <div class="p"><span></span><i></i></div>
-              </div>
+        <!-- Service orbit: a ring of every service around one minimal line drawing -->
+        <div class="orbit" id="orbit" aria-hidden="true">
+          <div class="orbit__ring orbit__ring--outer" data-depth="12"></div>
+          <div class="orbit__ring orbit__ring--inner" data-depth="22"></div>
+          <div class="orbit__chips" data-depth="16">
+            <div class="orbit__spin">
+              <span class="chip" style="--a:0">🎨 Branding</span>
+              <span class="chip" style="--a:1">🛍️ Shopify</span>
+              <span class="chip" style="--a:2">👕 Apparel</span>
+              <span class="chip" style="--a:3">💻 Websites</span>
+              <span class="chip" style="--a:4">🛒 Etsy &amp; Amazon</span>
+              <span class="chip" style="--a:5">🏛️ Architecture</span>
+              <span class="chip" style="--a:6">📣 Marketing</span>
+              <span class="chip" style="--a:7">📱 UI/UX</span>
             </div>
-            <div class="win__cursor"><svg viewBox="0 0 20 28"><path d="M0 0 L0 22 L6 16 L11 27 L15 25 L10 14 L18 14 Z"/></svg></div>
           </div>
-
-          <div class="fc fc--logo" data-depth="28">
-            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/><circle cx="35" cy="50" r="24"/><circle cx="65" cy="50" r="24"/><path d="M30 62 L50 30 L70 62 Z"/></svg>
-            <span>Brand Identity</span>
-          </div>
-          <div class="fc fc--shirt" data-depth="40">
-            <svg viewBox="-150 -120 300 250"><path d="M-70 -110 L-140 -80 L-115 -20 L-85 -32 L-85 120 L85 120 L85 -32 L115 -20 L140 -80 L70 -110 C60 -85 35 -72 0 -72 C-35 -72 -60 -85 -70 -110 Z"/></svg>
-            <div class="swatches"><i></i><i></i><i></i><i></i></div>
-          </div>
-          <div class="fc fc--plan" data-depth="22">
-            <svg viewBox="0 0 120 80"><rect x="4" y="4" width="112" height="72"/><path d="M50 4 V44 H4 M50 44 H80 V76 M80 4 V30"/></svg>
-            <span>Floor Plan</span>
-          </div>
-          <div class="fc fc--order" data-depth="34">
-            <span class="fc__ico">🛍️</span>
-            <div><strong>New order!</strong><small>Graphic Tee · $29.00</small></div>
-          </div>
-          <div class="fc fc--rate" data-depth="18">
-            <span class="stars">★★★★★</span><strong>5.0</strong>
+          <div class="stage" data-depth="30">
+            <svg class="art" viewBox="0 0 200 160">
+              <!-- 0 Branding: logo construction -->
+              <g class="art__set">
+                <circle cx="100" cy="72" r="46" pathLength="1"/>
+                <circle class="soft" cx="80" cy="72" r="30" pathLength="1"/>
+                <circle class="soft" cx="120" cy="72" r="30" pathLength="1"/>
+                <path d="M74 96 L100 46 L126 96 Z" pathLength="1"/>
+                <path class="soft" d="M40 138 H160" pathLength="1"/>
+              </g>
+              <!-- 1 Shopify: shopping bag + products -->
+              <g class="art__set">
+                <path d="M62 54 H138 L130 128 H70 Z" pathLength="1"/>
+                <path d="M82 54 V44 a18 18 0 0 1 36 0 V54" pathLength="1"/>
+                <path class="soft" d="M86 84 q14 14 28 0" pathLength="1"/>
+                <path class="soft" d="M40 144 H160" pathLength="1"/>
+              </g>
+              <!-- 2 Apparel: t-shirt -->
+              <g class="art__set">
+                <path d="M78 28 L48 42 L58 66 L70 61 V130 H130 V61 L142 66 L152 42 L122 28 C118 38 110 44 100 44 C90 44 82 38 78 28 Z" pathLength="1"/>
+                <circle class="soft" cx="100" cy="82" r="16" pathLength="1"/>
+                <path class="soft" d="M86 108 H114" pathLength="1"/>
+              </g>
+              <!-- 3 Websites: browser layout -->
+              <g class="art__set">
+                <rect x="30" y="30" width="140" height="100" rx="8" pathLength="1"/>
+                <path class="soft" d="M30 46 H170" pathLength="1"/>
+                <path d="M44 64 H110 M44 76 H92" pathLength="1"/>
+                <rect class="soft" x="122" y="58" width="36" height="28" rx="4" pathLength="1"/>
+                <path class="soft" d="M44 102 H76 M86 102 H118 M128 102 H158" pathLength="1"/>
+              </g>
+              <!-- 4 Etsy & Amazon: listing frames -->
+              <g class="art__set">
+                <rect x="38" y="28" width="56" height="48" rx="5" pathLength="1"/>
+                <rect x="106" y="28" width="56" height="48" rx="5" pathLength="1"/>
+                <rect x="38" y="86" width="56" height="48" rx="5" pathLength="1"/>
+                <rect x="106" y="86" width="56" height="48" rx="5" pathLength="1"/>
+                <path class="soft" d="M46 68 L60 52 L70 62 L78 54 L88 68 M114 126 L128 110 L138 120 L146 112 L156 126" pathLength="1"/>
+              </g>
+              <!-- 5 Architecture: modern house -->
+              <g class="art__set">
+                <path d="M34 132 H166" pathLength="1"/>
+                <path d="M46 132 V76 H112 V132 M98 76 V44 H156 V132" pathLength="1"/>
+                <path class="soft" d="M40 76 H118 M92 44 H162" pathLength="1"/>
+                <rect class="soft" x="58" y="92" width="26" height="22" pathLength="1"/>
+                <rect class="soft" x="112" y="56" width="32" height="20" pathLength="1"/>
+                <path class="soft" d="M122 132 V100 H142 V132" pathLength="1"/>
+              </g>
+              <!-- 6 Marketing: phone ad + growth -->
+              <g class="art__set">
+                <rect x="62" y="22" width="76" height="120" rx="12" pathLength="1"/>
+                <path class="soft" d="M90 32 H110" pathLength="1"/>
+                <path d="M76 110 L92 92 L106 100 L124 74" pathLength="1"/>
+                <path d="M112 74 H124 V86" pathLength="1"/>
+                <path class="soft" d="M76 56 H124 M76 66 H104" pathLength="1"/>
+              </g>
+              <!-- 7 UI/UX: app screen + cursor -->
+              <g class="art__set">
+                <rect x="50" y="24" width="72" height="116" rx="12" pathLength="1"/>
+                <circle class="soft" cx="86" cy="62" r="14" pathLength="1"/>
+                <path class="soft" d="M64 90 H108 M64 102 H96" pathLength="1"/>
+                <rect class="soft" x="64" y="114" width="44" height="14" rx="7" pathLength="1"/>
+                <path d="M128 92 V120 L135 113 L141 126 L146 124 L140 111 L150 111 Z" pathLength="1"/>
+              </g>
+            </svg>
+            <div class="stage__label"><strong id="stageTitle">Branding</strong><span id="stageSub">Logos &amp; brand identity</span></div>
           </div>
         </div>
       </div>

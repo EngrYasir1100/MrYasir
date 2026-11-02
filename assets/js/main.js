@@ -86,65 +86,35 @@ $$('.hero-canvas').forEach((canvas) => {
   }
 });
 
-/* ---------- Typing headline ---------- */
-const typed = $('#typed');
-if (typed && !reduceMotion) {
-  const words = typed.dataset.words.split('|');
-  let wi = 0, ci = words[0].length, deleting = true;
-  const step = () => {
-    const word = words[wi];
-    if (deleting) {
-      ci--;
-      typed.textContent = word.slice(0, ci);
-      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
-      setTimeout(step, 45);
-    } else {
-      const next = words[wi];
-      ci++;
-      typed.textContent = next.slice(0, ci);
-      if (ci === next.length) { deleting = true; setTimeout(step, 2200); }
-      else setTimeout(step, 85);
-    }
-  };
-  setTimeout(step, 2400);
-}
+/* ---------- Service orbit: one drawing per service, synced with the headline ---------- */
+const SERVICES_META = [
+  ['Branding', 'Logos & brand identity'],
+  ['Shopify Stores', 'Store design & setup'],
+  ['Apparel & POD', 'T-shirts & merch'],
+  ['Websites', 'WordPress & custom sites'],
+  ['Etsy & Amazon', 'Listings that sell'],
+  ['Architecture', 'Floor plans & 3D renders'],
+  ['Marketing', 'Ads & social creatives'],
+  ['UI/UX Design', 'Web & mobile apps'],
+];
+const orbit = $('#orbit');
+const artSets = orbit ? $$('.art__set', orbit) : [];
+const chips = orbit ? $$('.chip', orbit) : [];
+const stageLabel = orbit ? $('.stage__label', orbit) : null;
+const setService = (i) => {
+  if (!orbit) return;
+  artSets.forEach((g, k) => g.classList.toggle('on', k === i));
+  chips.forEach((c, k) => c.classList.toggle('active', k === i));
+  $('#stageTitle').textContent = SERVICES_META[i][0];
+  $('#stageSub').textContent = SERVICES_META[i][1];
+  stageLabel.classList.remove('swap'); void stageLabel.offsetWidth; stageLabel.classList.add('swap');
+};
+setService(0);
 
-/* ---------- Animated workspace: build loop + parallax ---------- */
-const scene = $('#scene');
-if (scene && !reduceMotion) {
-  const win = $('.win', scene);
-  const btn = $('.b__btn', scene);
-  const cart = $('.b__cart em', scene);
-  let count = 0;
-
-  const placeCursor = () => {
-    const wr = win.getBoundingClientRect();
-    const br = btn.getBoundingClientRect();
-    // getBoundingClientRect includes the 3D tilt; close enough for a pointer target
-    scene.style.setProperty('--cx', `${br.left - wr.left + br.width * 0.55}px`);
-    scene.style.setProperty('--cy', `${br.top - wr.top + br.height * 0.4}px`);
-  };
-
-  const play = () => {
-    scene.classList.remove('play');
-    btn.classList.remove('press');
-    void scene.offsetWidth; // restart CSS animations
-    placeCursor();
-    scene.classList.add('play');
-    setTimeout(() => btn.classList.add('press'), 4950);
-    setTimeout(() => {
-      count = (count % 9) + 1;
-      cart.textContent = count;
-      cart.classList.remove('bump'); void cart.offsetWidth; cart.classList.add('bump');
-    }, 5100);
-  };
-  play();
-  setInterval(() => { if (!document.hidden) play(); }, 9100);
-  window.addEventListener('resize', placeCursor);
-
-  // Mouse parallax
-  const hero = scene.closest('.hero');
-  const layers = $$('[data-depth]', scene);
+if (orbit && !reduceMotion) {
+  // Mouse parallax on the orbit layers
+  const hero = orbit.closest('.hero');
+  const layers = $$('[data-depth]', orbit);
   hero.addEventListener('pointermove', (e) => {
     const r = hero.getBoundingClientRect();
     const nx = (e.clientX - r.left) / r.width - 0.5;
@@ -155,8 +125,32 @@ if (scene && !reduceMotion) {
     });
   });
   hero.addEventListener('pointerleave', () => layers.forEach((l) => { l.style.translate = ''; }));
-} else if (scene) {
-  scene.classList.remove('play');
+}
+
+/* ---------- Typing headline ---------- */
+const typed = $('#typed');
+if (typed && !reduceMotion) {
+  const words = typed.dataset.words.split('|');
+  let wi = 0, ci = words[0].length, deleting = true;
+  const step = () => {
+    if (deleting) {
+      ci--;
+      typed.textContent = words[wi].slice(0, ci);
+      if (ci === 0) {
+        deleting = false;
+        wi = (wi + 1) % words.length;
+        setService(wi % SERVICES_META.length);
+      }
+      setTimeout(step, 40);
+    } else {
+      const next = words[wi];
+      ci++;
+      typed.textContent = next.slice(0, ci);
+      if (ci === next.length) { deleting = true; setTimeout(step, 2300); }
+      else setTimeout(step, 80);
+    }
+  };
+  setTimeout(step, 2600);
 }
 
 /* ---------- Scroll reveal + counters ---------- */
