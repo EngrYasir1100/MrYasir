@@ -158,6 +158,66 @@ if (typed && !reduceMotion) {
   setTimeout(step, 2600);
 }
 
+/* ---------- Blueprint layer on white sections ---------- */
+const DECOS = [
+  // construction circles
+  `<svg class="deco deco--tr deco--spin" viewBox="0 0 300 300">
+    <circle class="d" cx="150" cy="150" r="118" pathLength="1"/>
+    <circle class="d" cx="112" cy="150" r="76" pathLength="1"/>
+    <circle class="d" cx="188" cy="150" r="76" pathLength="1"/>
+    <path class="g" d="M10 150 H290 M150 10 V290"/>
+    <path class="d" d="M95 205 L150 95 L205 205 Z" pathLength="1"/>
+    <rect class="dot" x="146" y="91" width="8" height="8"/><rect class="dot" x="91" y="201" width="8" height="8"/><rect class="dot" x="201" y="201" width="8" height="8"/>
+  </svg>`,
+  // pen tool curve
+  `<svg class="deco deco--bl deco--float" viewBox="0 0 300 300">
+    <path class="d" d="M20 230 C 90 90, 170 300, 230 150 S 290 60, 290 60" pathLength="1"/>
+    <path class="d" d="M20 230 L90 90 M230 150 L290 40" pathLength="1"/>
+    <path class="g" d="M20 270 H290 M20 260 V280 M290 260 V280"/>
+    <rect class="dot" x="16" y="226" width="8" height="8"/><rect class="dot" x="226" y="146" width="8" height="8"/>
+    <circle class="dot" cx="90" cy="90" r="4"/><circle class="dot" cx="290" cy="40" r="4"/>
+  </svg>`,
+  // dimension lines
+  `<svg class="deco deco--tr2" viewBox="0 0 300 300">
+    <path class="d" d="M40 60 H260" pathLength="1"/>
+    <path class="d" d="M40 50 V70 M260 50 V70" pathLength="1"/>
+    <path class="d" d="M60 90 V270" pathLength="1"/>
+    <path class="d" d="M50 90 H70 M50 270 H70" pathLength="1"/>
+    <rect class="g" x="90" y="90" width="170" height="180"/>
+    <path class="g" d="M90 90 L260 270 M260 90 L90 270"/>
+    <text x="118" y="50">1200 PX</text>
+  </svg>`,
+  // golden-ratio spiral
+  `<svg class="deco deco--br deco--float" viewBox="0 0 300 300">
+    <rect class="g" x="20" y="60" width="260" height="161"/>
+    <path class="g" d="M181 60 V221 M181 160 H280 M219 160 V221 M181 198 H219"/>
+    <path class="d" d="M20 221 A161 161 0 0 1 181 60 A99 99 0 0 1 280 160 A61 61 0 0 1 219 221 A38 38 0 0 1 181 183" pathLength="1"/>
+    <circle class="dot" cx="181" cy="60" r="4"/><circle class="dot" cx="280" cy="160" r="4"/>
+  </svg>`,
+];
+const lightSections = $$('main > .section:not(.dark)');
+if (lightSections.length) {
+  // one shared gradient for every motif
+  document.body.insertAdjacentHTML('afterbegin',
+    `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+      <linearGradient id="decoGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#3459d6" stop-opacity=".55"/><stop offset=".6" stop-color="#e38a36" stop-opacity=".6"/><stop offset="1" stop-color="#d6582e" stop-opacity=".65"/>
+      </linearGradient></defs></svg>`);
+  lightSections.forEach((sec, i) => {
+    sec.classList.add('lined');
+    sec.insertAdjacentHTML('afterbegin', DECOS[i % DECOS.length]);
+    const eb = $('.eyebrow', sec);
+    if (eb) sec.insertAdjacentHTML('afterbegin',
+      `<span class="side-label" aria-hidden="true"><b>${String(i + 1).padStart(2, '0')}</b>${eb.textContent.trim()}</span>`);
+  });
+  if ('IntersectionObserver' in window) {
+    const dio = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('deco-on'); dio.unobserve(e.target); }
+    }), { threshold: 0.15 });
+    lightSections.forEach((s) => dio.observe(s));
+  } else lightSections.forEach((s) => s.classList.add('deco-on'));
+}
+
 /* ---------- Scroll reveal + counters ---------- */
 const revealEls = $$('.brandband, .stat, .card, .work__item, .why__item, .step, .review, .award, .head-row, .svc, .info-card, .focus > div, .facts > div');
 const counters = $$('[data-count]');

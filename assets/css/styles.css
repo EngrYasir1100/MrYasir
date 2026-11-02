@@ -594,3 +594,80 @@ html:not(.js) .head-row h2::after { transform: scaleX(1); }
   .dark::before, .dark::after { width: 320px; height: 320px; }
 }
 .tilt.settled, html:not(.js) .tilt { transition: transform .18s ease-out, box-shadow .25s, border-color .25s, background .25s; }
+
+/* =========================================================
+   Blueprint layer for white sections (premium structure lines)
+   JS adds .lined plus one .deco motif and a margin label
+   ========================================================= */
+.lined { position: relative; overflow: hidden; isolation: isolate; }
+.lined > .container { position: relative; z-index: 1; }
+
+/* vertical layout guides aligned to the content grid */
+.lined::before {
+  content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%;
+  width: min(1160px, calc(100% - 40px)); transform: translateX(-50%); pointer-events: none;
+  background:
+    linear-gradient(rgba(11,11,15,.07), rgba(11,11,15,.07)) 0 0 / 1px 100% no-repeat,
+    linear-gradient(rgba(11,11,15,.045), rgba(11,11,15,.045)) 25% 0 / 1px 100% no-repeat,
+    linear-gradient(rgba(var(--orange-rgb),.10), rgba(var(--orange-rgb),.10)) 50% 0 / 1px 100% no-repeat,
+    linear-gradient(rgba(11,11,15,.045), rgba(11,11,15,.045)) 75% 0 / 1px 100% no-repeat,
+    linear-gradient(rgba(11,11,15,.07), rgba(11,11,15,.07)) 100% 0 / 1px 100% no-repeat;
+  -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+}
+/* registration crosshairs on the outer guides */
+.lined::after {
+  content: ""; position: absolute; z-index: -1; top: 28px; left: 50%; height: 15px; pointer-events: none;
+  width: calc(min(1160px, calc(100% - 40px)) + 15px); transform: translateX(-50%);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15'%3E%3Cpath d='M7.5 0v15M0 7.5h15' stroke='%23d6582e' stroke-opacity='.55' stroke-width='1.2'/%3E%3Ccircle cx='7.5' cy='7.5' r='3.5' fill='none' stroke='%23d6582e' stroke-opacity='.4'/%3E%3C/svg%3E") 0 0 / 15px 15px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15'%3E%3Cpath d='M7.5 0v15M0 7.5h15' stroke='%233459d6' stroke-opacity='.55' stroke-width='1.2'/%3E%3Ccircle cx='7.5' cy='7.5' r='3.5' fill='none' stroke='%233459d6' stroke-opacity='.4'/%3E%3C/svg%3E") 100% 0 / 15px 15px no-repeat;
+}
+.section--alt.lined { background-image: radial-gradient(rgba(11,11,15,.05) 1px, transparent 1.2px); background-size: 24px 24px; }
+
+/* line-art motifs */
+.deco { position: absolute; z-index: 0; width: 340px; height: 340px; pointer-events: none; opacity: .9; }
+.deco--tr { top: -110px; right: -170px; opacity: .7; }
+.deco--tr2 { top: 30px; right: -120px; opacity: .8; }
+.deco--bl { bottom: -70px; left: -100px; }
+.deco--tl { top: 40px; left: -70px; }
+.deco--br { bottom: -60px; right: -80px; }
+.deco * { fill: none; stroke: url(#decoGrad); stroke-width: 1.3; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.deco .g { stroke: rgba(11,11,15,.14); stroke-width: 1; }
+.deco .dot { fill: #fff; stroke: var(--orange); stroke-width: 1.3; }
+.deco text { fill: rgba(11,11,15,.35); stroke: none; font: 600 10px "Plus Jakarta Sans", sans-serif; letter-spacing: .12em; }
+.js .deco .d { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.4s var(--ease); }
+.js .deco .d:nth-child(2) { transition-delay: .2s; } .js .deco .d:nth-child(3) { transition-delay: .4s; }
+.js .deco .d:nth-child(4) { transition-delay: .6s; } .js .deco .d:nth-child(5) { transition-delay: .8s; }
+.js .deco .dot, .js .deco text { opacity: 0; transition: opacity .8s 1.4s; }
+.lined.deco-on .deco .d { stroke-dashoffset: 0; }
+.lined.deco-on .deco .dot, .lined.deco-on .deco text { opacity: 1; }
+.deco--spin { animation: spin 140s linear infinite; }
+.deco--float { animation: decoFloat 12s ease-in-out infinite alternate; }
+@keyframes decoFloat { to { transform: translate(14px, -16px) rotate(3deg); } }
+
+/* editorial margin label */
+.side-label {
+  position: absolute; z-index: 1; top: 96px; left: max(14px, calc((100% - 1160px) / 2 - 52px));
+  transform: rotate(180deg); writing-mode: vertical-rl;
+  font-size: .68rem; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: rgba(11,11,15,.32);
+  display: none; align-items: center; gap: 14px;
+}
+.side-label b { color: var(--orange); font-weight: 800; }
+.side-label::before { content: ""; width: 1px; height: 54px; background: var(--grad); }
+@media (min-width: 1360px) { .side-label { display: flex; } }
+
+@media (max-width: 860px) {
+  .deco { width: 230px; height: 230px; opacity: .6; }
+  .lined::before {
+    background:
+      linear-gradient(rgba(11,11,15,.07), rgba(11,11,15,.07)) 0 0 / 1px 100% no-repeat,
+      linear-gradient(rgba(var(--orange-rgb),.10), rgba(var(--orange-rgb),.10)) 50% 0 / 1px 100% no-repeat,
+      linear-gradient(rgba(11,11,15,.07), rgba(11,11,15,.07)) 100% 0 / 1px 100% no-repeat;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .deco .d { stroke-dashoffset: 0; transition: none; }
+  .js .deco .dot, .js .deco text { opacity: 1; }
+  .deco--spin, .deco--float { animation: none; }
+}
