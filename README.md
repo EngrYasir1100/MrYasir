@@ -27,12 +27,14 @@ Then visit http://localhost:8000.
 
 ## Portfolio images
 
-Real projects come from the Upwork agency portfolio. Their images live in `assets/img/work/<project>/`
-(`cover.jpg` for the card, `01.jpg`, `02.jpg`… for the pop-up gallery, resized to max 1600px).
-Concept samples for other services are illustrations in `assets/img/portfolio/` and are marked **Concept**.
+**Client work (Upwork):** all Upwork projects are shown together in one "Client Work" block (`#client-work`) on
+the Projects page and the home page. Clicking any tile opens one shared gallery; the pop-up lists each project so
+visitors can jump between them. Images live in `assets/img/work/<project>/` (`cover.jpg` for the tile, `01.jpg`,
+`02.jpg`… for the gallery, max 1600px).
 
-To add a project, copy one `<article class="work__item">` block in `portfolio.html` (and `index.html`
-to feature it on the home page), change the text, and point the image paths at your new folder.
+**Other projects:** separate cards below the client work (`#workGrid`), filterable by category. Concept samples are
+illustrations in `assets/img/portfolio/`, marked **Concept**. To add a project, copy one
+`<article class="work__item">` block, change the text, and point the image paths at your new folder.
 
 ## Contact form
 

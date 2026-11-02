@@ -299,8 +299,7 @@ if (filters.length) {
 
 /* ---------- Project modal ---------- */
 const modal = $('#workModal');
-$$('.work__open').forEach((btn) => btn.addEventListener('click', () => {
-  const tpl = $('.work__details', btn.parentElement);
+const openProject = (tpl, start = 0) => {
   if (!modal || !tpl || typeof modal.showModal !== 'function') {
     window.location.href = 'portfolio.html';
     return;
@@ -308,8 +307,17 @@ $$('.work__open').forEach((btn) => btn.addEventListener('click', () => {
   const content = $('.modal__content', modal);
   content.replaceChildren(tpl.content.cloneNode(true));
   modal.showModal();
-  setupGallery($('.gallery', content));
-}));
+  const g = $('.gallery', content);
+  setupGallery(g);
+  if (g && g.show) {
+    g.show(start, true);
+    $$('.cw__jump', content).forEach((b) => b.addEventListener('click', () => g.show(Number(b.dataset.jump))));
+  }
+};
+$$('.work__open').forEach((btn) => btn.addEventListener('click', () => openProject($('.work__details', btn.parentElement))));
+// Client-work block: every tile / button opens the shared gallery at its own image
+$$('.cw [data-start]').forEach((btn) => btn.addEventListener('click', () =>
+  openProject($('.work__details', btn.closest('.cw')), Number(btn.dataset.start))));
 if (modal) {
   $('.modal__close', modal).addEventListener('click', () => modal.close());
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
@@ -328,16 +336,21 @@ function setupGallery(g) {
   if (thumbs.length < 2) return;
   const main = $('.gallery__main', g);
   const count = $('.gallery__count', g);
+  const caption = $('.gallery__caption', g);
   let i = 0;
-  const show = (n) => {
+  const show = (n, instant = false) => {
     i = (n + thumbs.length) % thumbs.length;
     main.classList.remove('is-in'); void main.offsetWidth;
     main.src = $('img', thumbs[i]).src;
     main.classList.add('is-in');
     thumbs.forEach((t, k) => t.classList.toggle('is-active', k === i));
-    thumbs[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+    const strip = thumbs[i].parentElement;
+    strip.scrollTo({ left: thumbs[i].offsetLeft - strip.clientWidth / 2 + thumbs[i].clientWidth / 2,
+      behavior: instant || reduceMotion ? 'auto' : 'smooth' });
     if (count) count.textContent = `${i + 1} / ${thumbs.length}`;
+    if (caption && thumbs[i].dataset.caption) caption.textContent = thumbs[i].dataset.caption;
   };
+  g.show = show;
   g.go = (d) => show(i + d);
   thumbs.forEach((t, k) => t.addEventListener('click', () => show(k)));
   $('.gallery__nav--prev', g).addEventListener('click', () => show(i - 1));
