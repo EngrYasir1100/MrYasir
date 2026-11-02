@@ -320,7 +320,7 @@ if (modal) {
    and paste its URL into FORM_ENDPOINT.
    Until either is set, visitors are sent to the Upwork profile. */
 const FORM_ENDPOINT = '';
-const CONTACT_EMAIL = '';
+const CONTACT_EMAIL = 'hello@deveignagency.com';
 const UPWORK_URL = 'https://www.upwork.com/agencies/1889365964050848512/';
 
 const form = $('#contactForm');

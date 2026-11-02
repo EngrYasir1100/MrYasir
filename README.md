@@ -35,10 +35,11 @@ project, change its `Concept` pill to `<span class="pill pill--ok">Client projec
 
 ## Contact form
 
-Until it's configured, the form sends visitors to the Upwork profile. In `assets/js/main.js`:
+The quote form is connected to **hello@deveignagency.com** (`CONTACT_EMAIL` in `assets/js/main.js`).
+Submitting it opens the visitor's email app with their details filled in, addressed to that inbox.
 
-- set `CONTACT_EMAIL` to open the visitor's email app with the message filled in, or
-- create a free form at https://formspree.io and paste its URL into `FORM_ENDPOINT` to receive messages directly.
+To receive messages directly without the visitor's email app, create a free form at https://formspree.io
+with hello@deveignagency.com and paste its URL into `FORM_ENDPOINT`.
 
 ## Domain: deveignagency.com
 
