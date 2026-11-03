@@ -301,7 +301,7 @@ if (filters.length) {
 const modal = $('#workModal');
 const openProject = (tpl, start = 0) => {
   if (!modal || !tpl || typeof modal.showModal !== 'function') {
-    window.location.href = 'portfolio.html';
+    window.location.href = '/portfolio/';
     return;
   }
   const content = $('.modal__content', modal);
@@ -488,11 +488,11 @@ if (finePointer && !reduceMotion) {
 
 /* ---------- Smooth page transitions between site pages ---------- */
 if (!reduceMotion) {
-  $$('a[href$=".html"], a[href*=".html#"]').forEach((a) => {
+  $$('a[href^="/"]:not([href^="//"])').forEach((a) => {
     a.addEventListener('click', (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
       const url = new URL(a.href, location.href);
-      if (url.pathname === location.pathname) return; // same-page anchors scroll normally
+      if (url.pathname === location.pathname || url.pathname.startsWith('/assets/')) return; // same page / files
       e.preventDefault();
       document.body.classList.add('leaving');
       setTimeout(() => { location.href = a.href; }, 220);

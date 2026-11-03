@@ -4,13 +4,18 @@ A fast, responsive multi-page website for Deveign Agency. Plain HTML, CSS and Ja
 
 ## Pages
 
-| File | Page |
-| --- | --- |
-| `index.html` | Home: animated hero, services, featured projects, process, ratings |
-| `services.html` | All 8 services with deliverables and skills, full skill list |
-| `portfolio.html` | Filterable projects with a details pop-up |
-| `about.html` | Story, values, awards, team, client focus |
-| `contact.html` | Quote form, contact details, FAQ |
+Each page lives in its own folder, so addresses are clean (no `.html`):
+
+| Address | File | Page |
+| --- | --- | --- |
+| `/` | `index.html` | Home: animated hero, services, client work, process, ratings |
+| `/services/` | `services/index.html` | All 8 services with deliverables and skills, full skill list |
+| `/portfolio/` | `portfolio/index.html` | Client Work (Upwork) plus filterable project cards |
+| `/about/` | `about/index.html` | Story, values, awards, team, client focus |
+| `/contact/` | `contact/index.html` | Quote form, contact details, FAQ |
+
+The old addresses (`services.html`, `about.html`, …) are small redirect pages, so links shared earlier
+still work. Links and asset paths start with `/` (e.g. `/assets/css/styles.css`).
 
 Styles are in `assets/css/styles.css` and scripts in `assets/js/main.js`. Pages link them with a version
 (`styles.css?v=…`, `main.js?v=…`); change that number on all pages after editing either file, so visitors'
@@ -19,7 +24,7 @@ Brand colours are at the top of the stylesheet (`--orange`, `--navy`).
 
 ## Preview locally
 
-Open `index.html` in a browser, or run:
+Clean addresses need a web server (opening the files directly won't follow the links). Run:
 
 ```bash
 python3 -m http.server 8000
@@ -36,7 +41,7 @@ visitors can jump between them. Images live in `assets/img/work/<project>/` (`co
 
 **Other projects:** separate cards below the client work (`#workGrid`), filterable by category. Concept samples are
 illustrations in `assets/img/portfolio/`, marked **Concept**. To add a project, copy one
-`<article class="work__item">` block, change the text, and point the image paths at your new folder.
+`<article class="work__item">` block in `portfolio/index.html`, change the text, and point the image paths at your new folder.
 
 ## Contact form
 
