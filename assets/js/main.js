@@ -308,6 +308,13 @@ const openProject = (tpl, start = 0) => {
   content.replaceChildren(tpl.content.cloneNode(true));
   modal.showModal();
   const g = $('.gallery', content);
+  // Wide images (landscape renders) get a full-width layout: image on top, text below
+  modal.classList.remove('modal--wide');
+  const first = g && $('.gallery__main', g);
+  if (first && !$('.cw__jumps', content)) {
+    const decide = () => modal.classList.toggle('modal--wide', first.naturalWidth > first.naturalHeight * 1.25);
+    if (first.complete && first.naturalWidth) decide(); else first.addEventListener('load', decide, { once: true });
+  }
   setupGallery(g);
   if (g && g.show) {
     g.show(start, true);
@@ -332,9 +339,13 @@ if (modal) {
 /* Image gallery inside the project pop-up: arrows, thumbnails, keyboard, swipe */
 function setupGallery(g) {
   if (!g) return;
+  const stage = $('.gallery__stage', g);
+  const main = $('.gallery__main', g);
+  // Blurred copy of the current image fills the space around it (no black bars)
+  const setBg = (src) => { if (stage && src) stage.style.setProperty('--stage-bg', 'url("' + src + '")'); };
+  setBg(main && main.getAttribute('src'));
   const thumbs = $$('.gallery__thumb', g);
   if (thumbs.length < 2) return;
-  const main = $('.gallery__main', g);
   const count = $('.gallery__count', g);
   const caption = $('.gallery__caption', g);
   let i = 0;
@@ -342,6 +353,7 @@ function setupGallery(g) {
     i = (n + thumbs.length) % thumbs.length;
     main.classList.remove('is-in'); void main.offsetWidth;
     main.src = $('img', thumbs[i]).src;
+    setBg(main.src);
     main.classList.add('is-in');
     thumbs.forEach((t, k) => t.classList.toggle('is-active', k === i));
     const strip = thumbs[i].parentElement;
